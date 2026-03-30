@@ -1,0 +1,27 @@
+{
+  "libVersion": "3.14.1",
+  "projectname": "%E6%A0%A1%E5%9B%AD%E6%99%BA%E8%83%BD%E5%8A%A9%E6%89%8B",
+  "setting": {
+    "urlCheck": false,
+    "coverView": true,
+    "lazyloadPlaceholderEnable": false,
+    "skylineRenderEnable": false,
+    "preloadBackgroundData": false,
+    "autoAudits": false,
+    "showShadowRootInWxmlPanel": true,
+    "compileHotReLoad": true
+  },
+  "condition": {
+    "miniprogram": {
+      "list": [
+        {
+          "name": "pages/bind_account/bind_account",
+          "pathName": "pages/grades/grades",
+          "query": "",
+          "scene": null,
+          "launchMode": "default"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,74 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/functions/functions",
+    "pages/user/user",
+    "pages/user_info/user_info",
+    "pages/map/map",
+    "pages/forum/forum",
+    "pages/publish/publish",
+    "pages/askAI/askAI",
+    "pages/myLikes/myLikes",
+    "pages/postDetail/postDetail",
+    "pages/myPosts/myPosts",
+    "pages/bind_account/bind_account",
+    "pages/grades/grades",
+    "pages/schedule/schedule",
+    "pages/market/market",
+    "pages/goods_publish/goods_publish",
+    "pages/market_detail/market_detail",
+    "pages/my_goods/my_goods",
+    "pages/myMessages/myMessages",
+    "pages/lost/lost",
+    "pages/lf_publish/lf_publish",
+    "pages/lf_detail/lf_detail",
+    "pages/my_lfs/my_lfs",
+    "pages/classroom/classroom",
+    "pages/point_market/point_market",
+    "pages/partner/partner",
+    "pages/partner_publish/partner_publish",
+    "pages/partner_mine/partner_mine",
+    "pages/errand/errand",
+    "pages/physical_test/physical_test",
+    "pages/cet_score/cet_score",
+    "pages/exam/exam"
+  ],
+  "permission": {
+    "scope.userLocation": {
+      "desc": "你的位置信息将用于小程序位置接口的效果展示"
+    }
+  },
+  "requiredPrivateInfos": [
+    "getLocation"
+  ],
+  "window": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "校园助手",
+    "navigationBarBackgroundColor": "#fff",
+    "backgroundTextStyle": "light"
+  },
+  "tabBar": {
+    "selectedColor": "#1c1d1b",
+    "position": "bottom",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "iconPath": "images/icon/首页.png",
+        "selectedIconPath": "images/icon/首页_选中.png",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/functions/functions",
+        "iconPath": "images/icon/功能.png",
+        "selectedIconPath": "images/icon/功能_选中.png",
+        "text": "功能"
+      },
+      {
+        "pagePath": "pages/user/user",
+        "iconPath": "images/icon/用户.png",
+        "selectedIconPath": "images/icon/用户_选中.png",
+        "text": "用户"
+      }
+    ]
+  }
+}
