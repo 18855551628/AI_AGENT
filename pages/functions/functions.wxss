@@ -1,0 +1,272 @@
+page {
+  background: linear-gradient(180deg, #F8F9FC 0%, #F0F3F8 100%);
+  font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica,
+    Segoe UI, Arial, Roboto, 'PingFang SC', 'miui', 'Hiragino Sans GB', 'Microsoft Yahei',
+    sans-serif;
+}
+
+.container {
+  padding: 40rpx 30rpx;
+  box-sizing: border-box;
+  min-height: 100vh;
+}
+
+.header-section {
+  margin-bottom: 50rpx;
+  animation: slideDown 0.6s ease-out;
+}
+
+.title {
+  font-size: 48rpx;
+  font-weight: 700;
+  color: #1A1A1A;
+  letter-spacing: -0.5rpx;
+}
+
+.subtitle {
+  font-size: 28rpx;
+  color: #7C8CA3;
+  margin-top: 12rpx;
+  font-weight: 500;
+}
+
+/* Bento Box 容器 */
+.bento-container {
+  display: flex;
+  flex-direction: column;
+  gap: 32rpx;
+}
+
+/* 通用卡片基础样式 */
+.bento-item {
+  border-radius: 28rpx;
+  padding: 36rpx;
+  box-sizing: border-box;
+  background-color: #ffffff; /* 兜底白色 */
+  box-shadow: 0 8rpx 24rpx rgba(0, 0, 0, 0.06);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.bento-item:active {
+  transform: scale(0.98);
+  box-shadow: 0 12rpx 32rpx rgba(0, 0, 0, 0.12);
+}
+
+.card-large {
+  width: 100%;
+  min-height: 300rpx;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  z-index: 1;
+}
+
+.bg-gradient {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.bg-gradient::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+  background-size: 50rpx 50rpx;
+  animation: float 20s linear infinite;
+}
+
+@keyframes float {
+  0% { transform: translate(0, 0); }
+  100% { transform: translate(50rpx, 50rpx); }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20rpx);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24rpx;
+}
+
+.card-title-white {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.status-badge {
+  display: flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 6rpx 16rpx;
+  border-radius: 20rpx;
+}
+
+.status-dot {
+  width: 12rpx;
+  height: 12rpx;
+  background-color: #FFC107;
+  border-radius: 50%;
+  margin-right: 8rpx;
+  box-shadow: 0 0 8rpx rgba(255, 193, 7, 0.6);
+}
+
+.status-dot.active {
+  background-color: #00E676;
+  box-shadow: 0 0 8rpx rgba(0, 230, 118, 0.6);
+}
+
+.status-text {
+  font-size: 22rpx;
+  color: #fff;
+  font-weight: bold;
+}
+
+.course-name {
+  font-size: 44rpx;
+  font-weight: 700;
+  color: #FFFFFF;
+  margin-bottom: 20rpx;
+  display: block;
+}
+
+.course-details {
+  display: flex;
+  flex-direction: column;
+  gap: 14rpx;
+}
+
+.detail-row {
+  display: flex;
+  align-items: center;
+  gap: 10rpx;
+}
+
+.detail-text {
+  font-size: 26rpx;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+/* 中型卡片行 (四宫格) */
+.bento-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 10rpx;
+  flex-wrap: wrap;
+}
+
+.card-medium {
+  flex: 0 0 calc(50% - 8rpx); 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; 
+  height: 210rpx; 
+  box-sizing: border-box;
+  border-radius: 24rpx;
+}
+
+.card-medium:active {
+  box-shadow: 0 8rpx 24rpx rgba(0, 0, 0, 0.08);
+  transform: translateY(-2rpx);
+}
+
+.icon-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 64rpx;
+  height: 68rpx;
+  background: rgba(255, 255, 255, 0.6); 
+  border-radius: 18rpx;
+  margin-bottom: 12rpx;
+}
+
+.text-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
+  gap: 15rpx;
+}
+
+.card-title {
+  font-size: 30rpx; 
+  font-weight: 600;
+  color: #333333;
+}
+
+.card-desc {
+  font-size: 22rpx;
+  color: #888888;
+}
+
+/* 节点标题 */
+.section-header {
+  font-size: 40rpx;
+  font-weight: 700;
+  color: #1A1A1A;
+  margin: 16rpx 0 16rpx 0;
+  letter-spacing: -0.5rpx;
+}
+
+/* 骨架屏和空状态 */
+.custom-skeleton {
+  --skeleton-row-background-color: rgba(255, 255, 255, 0.2) !important;
+  --skeleton-title-background-color: rgba(255, 255, 255, 0.2) !important;
+  --skeleton-animation-background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent) !important;
+}
+
+.custom-skeleton .van-skeleton {
+  padding: 0 !important;
+}
+
+.custom-skeleton .van-skeleton__title {
+  margin-top: 0 !important;
+}
+
+.empty-class-pro {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20rpx 0;
+}
+
+.empty-img {
+  width: 500rpx;
+  height: 160rpx;
+  margin-bottom: 24rpx;
+  opacity: 0.9;
+}
+
+.empty-text-group {
+  text-align: center;
+}
+
+.empty-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #fff;
+  margin-bottom: 8rpx;
+  display: block;
+  text-shadow: 0 2rpx 4rpx rgba(0,0,0,0.1);
+}
+
+.empty-desc {
+  font-size: 24rpx;
+  color: rgba(255, 255, 255, 0.8);
+}

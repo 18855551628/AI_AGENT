@@ -1,0 +1,70 @@
+<view class="container">
+  <view class="header-section">
+    <view class="title">你好，{{userInfo.name}}</view>
+    <view class="subtitle">{{userInfo.greeting}}</view>
+  </view>
+
+  <view class="bento-container">
+    
+    <view class="bento-item card-large bg-gradient" bindtap="handleNavigate" data-target="schedule">
+      
+      <van-skeleton title row="3" loading="{{ loading }}" custom-class="custom-skeleton">
+        
+        <view class="card-top">
+  <text class="card-title-white">下一节课</text>
+  <view class="status-badge" wx:if="{{nextClass.hasCourse}}">
+    <view class="status-dot {{nextClass.status === '进行中' ? 'active' : ''}}"></view>
+    <text class="status-text">{{nextClass.status}}</text>
+  </view>
+</view>
+        
+        <view class="course-content" wx:if="{{nextClass.hasCourse}}">
+          <text class="course-name">{{nextClass.courseName}}</text>
+          <view class="course-details">
+            <view class="detail-row"><van-icon name="clock-o" color="rgba(255,255,255,0.7)" size="28rpx"/><text class="detail-text">{{nextClass.time}}</text></view>
+            <view class="detail-row"><van-icon name="location-o" color="rgba(255,255,255,0.7)" size="28rpx"/><text class="detail-text">{{nextClass.location}}</text></view>
+            <view class="detail-row"><van-icon name="contact-o" color="rgba(255,255,255,0.7)" size="28rpx"/><text class="detail-text">{{nextClass.teacher}}</text></view>
+          </view>
+        </view>
+        <view class="empty-class-pro" wx:else>
+      <image class="empty-img" src="/images/empty-relax.png" mode="aspectFit"></image>
+      <view class="empty-text-group">
+        <text class="empty-title">今天没有课</text>
+        <text class="empty-desc">好好休息，做点自己喜欢的事吧~</text>
+      </view>
+    </view>
+        
+      </van-skeleton>
+    </view>
+
+    <view class="bento-row">
+      <block wx:for="{{quickTools}}" wx:key="id">
+        <view class="bento-item card-medium" style="background-color: {{item.color}}" bindtap="handleNavigate" data-target="{{item.id}}">
+          <view class="icon-wrap">
+            <van-icon name="{{item.icon}}" size="52rpx" color="#555"/>
+          </view>
+          <view class="text-group">
+            <text class="card-title">{{item.name}}</text>
+            <text class="card-desc">{{item.desc}}</text>
+          </view>
+        </view>
+      </block>
+    </view>
+
+    <view class="section-header">校园生活</view>
+    <view class="bento-row">
+      <block wx:for="{{communityModules}}" wx:key="id">
+        <view class="bento-item card-medium" style="background-color: {{item.color}}" bindtap="handleNavigate" data-target="{{item.id}}">
+          <view class="icon-wrap">
+            <van-icon name="{{item.icon}}" size="52rpx" color="#555"/>
+          </view>
+          <view class="text-group">
+            <text class="card-title">{{item.name}}</text>
+            <text class="card-desc">{{item.desc}}</text>
+          </view>
+        </view>
+      </block>
+    </view>
+
+  </view>
+</view>
