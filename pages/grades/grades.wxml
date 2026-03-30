@@ -1,0 +1,107 @@
+<view class="page-container">
+  
+  <view class="dashboard-card bg-gradient">
+    <view class="term-title">{{ term || '本学期成绩' }}</view>
+    <view class="stats-row">
+      <view class="stat-item">
+        <text class="stat-value">{{ avgGpa }}</text>
+        <text class="stat-label">加权平均绩点</text>
+      </view>
+      <view class="stat-divider"></view>
+      <view class="stat-item">
+        <text class="stat-value">{{ totalCredit }}</text>
+        <text class="stat-label">总计获得学分</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="filter-section">
+    <van-dropdown-menu active-color="#4F7BFC" custom-class="custom-dropdown">
+      <van-dropdown-item 
+        value="{{ selectedYear }}" 
+        options="{{ yearOptions }}" 
+        bind:change="onYearChange" 
+      />
+      <van-dropdown-item 
+        value="{{ selectedTerm }}" 
+        options="{{ termOptions }}" 
+        bind:change="onTermChange" 
+      />
+    </van-dropdown-menu>
+  </view>
+  <view class="content-area">
+    
+    <van-skeleton title row="10" loading="{{ loading }}">
+      
+      <van-empty wx:if="{{ grades.length === 0 && !loading }}" description="该学期暂无成绩数据" />
+
+      <view class="grade-list" wx:if="{{ grades.length > 0 }}">
+        <block wx:for="{{ grades }}" wx:key="courseName">
+          <view class="grade-card" bindtap="showDetail" data-course="{{ item }}">
+            
+            <view class="card-left">
+              <view class="course-name">{{ item.courseName }}</view>
+              <view class="course-tags">
+                <van-tag type="primary" plain size="medium">{{ item.property }}</van-tag>
+                <text class="credit-text">{{ item.credit }} 学分</text>
+                <text class="teacher-text" wx:if="{{item.teacher}}">👨‍🏫 {{ item.teacher }}</text>
+              </view>
+            </view>
+            
+            <view class="card-right">
+              <text class="score {{ item.colorClass }}">{{ item.score }}</text>
+              <text class="gpa" wx:if="{{ item.gpa && item.gpa !== '0.0' }}">绩点 {{ item.gpa }}</text>
+            </view>
+            
+          </view>
+        </block>
+      </view>
+
+    </van-skeleton>
+  </view>
+
+  <van-popup 
+    show="{{ isShowDetail }}" 
+    round 
+    closeable 
+    custom-style="width: 90%; padding: 40rpx 30rpx; border-radius: 32rpx;" 
+    bind:close="closeDetail"
+  >
+    <view class="popup-header">
+      <text class="popup-title">成绩详情</text>
+    </view>
+    <view class="popup-course-name">👉 课程名称：<text class="highlight">{{ currentCourse.courseName }}</text></view>
+
+    <view style="text-align: center; padding: 60rpx 0;" wx:if="{{ detailLoading }}">
+      <van-loading type="spinner" color="#4F7BFC" vertical>正在潜入教务系统查详情...</van-loading>
+    </view>
+
+    <view class="detail-table" wx:if="{{ !detailLoading }}">
+      <view class="table-header">
+        <text class="th">成绩分项</text>
+        <text class="th">分项比例</text>
+        <text class="th">成绩</text>
+      </view>
+      
+      <block wx:for="{{ currentCourse.details }}" wx:key="name">
+        <view class="table-row">
+          <text class="td">【 {{ item.name }} 】</text>
+          <text class="td">{{ item.percent || '-' }}</text>
+          <text class="td">{{ item.score }}</text>
+        </view>
+      </block>
+      
+      <view class="table-row" wx:if="{{ currentCourse.details.length === 0 }}">
+        <text class="td" style="flex: 3;">该课程教务系统暂无分项明细</text>
+      </view>
+
+      <view class="table-row total-row">
+        <text class="td">【 总评 】</text>
+        <text class="td"></text>
+        <text class="td score-text">{{ currentCourse.score }}</text>
+      </view>
+    </view>
+  </van-popup>
+
+  <van-toast id="van-toast" />
+</view>

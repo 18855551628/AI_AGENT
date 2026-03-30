@@ -1,0 +1,35 @@
+<view class="container">
+  <view wx:if="{{myList.length === 0}}" class="empty-tip">
+    你还没有发布过闲置哦~
+  </view>
+
+  <block wx:for="{{myList}}" wx:key="_id">
+    <view class="manage-card">
+      <view class="card-main" bindtap="toDetail" data-id="{{item._id}}">
+        <image class="thumb" src="{{item.imgs[0]}}" mode="aspectFill"></image>
+        <view class="info">
+          <view class="title">{{item.title}}</view>
+          <view class="price">¥{{item.price}}</view>
+          <view class="status">
+            浏览 {{item.view_count || 0}} · {{item.status === 1 ? '在售' : '已下架'}}
+          </view>
+        </view>
+      </view>
+      
+      <view class="action-bar">
+  <view 
+    class="btn status-btn {{item.status === 1 ? 'off-shelf' : 'on-shelf'}}" 
+    catchtap="onUpdateStatus" 
+    data-id="{{item._id}}" 
+    data-index="{{index}}"
+    data-status="{{item.status}}"
+  >
+    {{item.status === 1 ? '下架' : '上架'}}
+  </view>
+
+  <view class="btn edit-btn" bindtap="onEdit" data-id="{{item._id}}">编辑</view>
+  <view class="btn del-btn" bindtap="onDelete" data-id="{{item._id}}" data-index="{{index}}">删除</view>
+</view>
+    </view>
+  </block>
+</view>

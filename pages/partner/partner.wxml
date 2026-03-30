@@ -1,0 +1,78 @@
+<view class="partner-container">
+  <view class="header-wrap">
+    <scroll-view class="category-scroll" scroll-x="true" show-scrollbar="false" enhanced="true" bounces="true">
+      <view class="category-list">
+        <view class="cat-item {{currentTab === 'all' ? 'active' : ''}}" bindtap="switchTab" data-tab="all">全部</view>
+        <view class="cat-item {{currentTab === 'study' ? 'active' : ''}}" bindtap="switchTab" data-tab="study">约自习</view>
+        <view class="cat-item {{currentTab === 'activity' ? 'active' : ''}}" bindtap="switchTab" data-tab="activity">约活动</view>
+        <view class="cat-item {{currentTab === 'sport' ? 'active' : ''}}" bindtap="switchTab" data-tab="sport">约运动</view>
+        <view class="cat-item {{currentTab === 'meal' ? 'active' : ''}}" bindtap="switchTab" data-tab="meal">干饭拼单</view>
+        <view class="cat-item {{currentTab === 'game' ? 'active' : ''}}" bindtap="switchTab" data-tab="game">游戏开黑</view>
+      </view>
+    </scroll-view>
+  </view>
+
+  <view class="post-list">
+    <block wx:for="{{partnerList}}" wx:key="_id">
+      <view class="post-card">
+        
+        <view class="post-header">
+          <view class="user-info">
+            <image class="avatar" src="{{item.avatar}}" mode="aspectFill"></image>
+            <view class="name-box">
+              <view class="name-row">
+                <text class="user-name">{{item.nickname}}</text>
+                <text class="user-gender {{item.gender === '女' ? 'female' : 'male'}}">{{item.gender}}</text>
+              </view>
+              <text class="post-time">{{item.time}}</text>
+            </view>
+          </view>
+          
+        </view>
+
+        <view class="post-content">
+          <text class="tag-text">#{{item.tag}}#</text>
+          <text class="desc-text">{{item.content}}</text>
+        </view>
+
+        <view class="post-footer">
+          <view class="location-box" wx:if="{{item.dormArea}}">
+            <text class="location-text">{{item.dormArea}}</text>
+          </view>
+          <view class="location-box" wx:else>
+            <text class="location-text">校园内</text>
+          </view>
+          <button class="join-btn {{item.hasApplied ? 'applied' : ''}}" bindtap="handleJoin" data-item="{{item}}">
+            {{item.hasApplied ? '申请中' : '申请加入'}}
+          </button>
+        </view>
+        
+      </view>
+    </block>
+
+    <view class="bottom-tip" wx:if="{{!hasMore && partnerList.length > 0}}">没有更多啦，自己发布一个吧~</view>
+    <view class="bottom-tip" wx:if="{{partnerList.length === 0}}">暂无搭子数据~</view>
+    <view class="bottom-tip" wx:if="{{hasMore && partnerList.length > 0}}">上拉加载更多...</view>
+  </view>
+
+  <movable-area class="fab-overlay">
+  <movable-view x="{{movableX}}" y="{{movableY}}" direction="all" class="fab-container">
+    
+    <view class="sub-menu-list {{isFabOpen ? 'open' : ''}}">
+      <view class="sub-btn" catchtap="gotoMyPartner">
+        <text class="sub-text">我的</text>
+        <view class="sub-icon" style="background: #1890ff;">👤</view>
+      </view>
+      <view class="sub-btn" catchtap="gotoPublish">
+        <text class="sub-text">发布</text>
+        <view class="sub-icon" style="background: #07c160;">+</view>
+      </view>
+    </view>
+
+    <view class="fab-main-btn {{isFabOpen ? 'active' : ''}}" catchtap="toggleFab">
+      <text class="main-icon">+</text>
+    </view>
+    
+  </movable-view>
+</movable-area>
+</view>

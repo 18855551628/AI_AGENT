@@ -1,0 +1,142 @@
+/* 页面全屏 */
+page {
+  height: 100%;
+  overflow: hidden;
+}
+
+.map-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+/* 地图占据上半部分，高度自适应 */
+.campus-map {
+  width: 100%;
+  flex: 1; /* 占据剩余空间 */
+}
+
+/* 底部列表容器 */
+.location-list-box {
+  height: 40%; /* 列表占屏幕的 40% */
+  background-color: #fff;
+  border-top-left-radius: 30rpx;
+  border-top-right-radius: 30rpx;
+  box-shadow: 0 -4rpx 20rpx rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  z-index: 99;
+  margin-top: -30rpx; /* 稍微往上提一点，盖住地图边缘 */
+}
+
+.list-header {
+  padding: 20rpx 30rpx;
+  border-bottom: 1px solid #f5f5f5;
+}
+
+.title {
+  font-size: 30rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+.list-scroll {
+  flex: 1; /* 撑满剩余高度 */
+  overflow-y: auto;
+}
+
+.location-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30rpx;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.item-left {
+  flex: 1;
+}
+
+.item-name {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 8rpx;
+}
+
+.item-desc {
+  font-size: 24rpx;
+  color: #999;
+}
+
+.item-right {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100rpx;
+  border-left: 1px solid #eee;
+  padding-left: 20rpx;
+}
+
+.go-text {
+  font-size: 20rpx;
+  color: #1890ff;
+  margin-top: 4rpx;
+}
+/* 详情卡片样式 */
+.detail-card {
+  position: absolute;
+  bottom: 50rpx;
+  left: 30rpx;
+  right: 30rpx;
+  background: #ffffff;
+  border-radius: 24rpx;
+  padding: 40rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 10rpx 40rpx rgba(0,0,0,0.1);
+  z-index: 1000; /* 确保在地图和列表之上 */
+  animation: slideUp 0.3s ease-out;
+}
+
+@keyframes slideUp {
+  from { transform: translateY(100%); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.card-name {
+  font-size: 34rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+.card-desc {
+  font-size: 24rpx;
+  color: #999;
+  margin-top: 8rpx;
+}
+
+.nav-btn {
+  background: #1890ff;
+  color: white;
+  padding: 15rpx 30rpx;
+  border-radius: 40rpx;
+  display: flex;
+  align-items: center;
+  font-size: 26rpx;
+}
+
+.nav-btn text {
+  margin-left: 8rpx;
+}
+
+.close-icon {
+  position: absolute;
+  top: -10rpx;
+  right: 20rpx;
+  font-size: 40rpx;
+  color: #ccc;
+  padding: 10rpx;
+}

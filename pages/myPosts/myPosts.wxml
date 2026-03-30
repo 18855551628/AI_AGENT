@@ -1,0 +1,61 @@
+<view class="container">
+  <view wx:if="{{!isLoading && posts.length === 0}}" class="empty-tip">
+    <text>暂无发布的帖子，快去发一条吧~</text>
+  </view>
+
+  <block wx:for="{{posts}}" wx:key="_id">
+    <view class="card" bindtap="gotoDetail" data-id="{{item._id}}" data-liked="{{item.isLiked}}">
+      <view class="user-row">
+        <image class="avatar" src="{{item.avatarUrl}}"></image>
+        <view class="user-info">
+          <text class="nickname">{{item.nickName}}</text>
+          <text class="time">{{item.timeString}}</text>
+        </view>
+      </view>
+
+      <view class="content">
+        <text>{{item.content}}</text>
+      </view>
+
+      <view class="image-grid" wx:if="{{item.images && item.images.length > 0}}">
+        <block wx:for="{{item.images}}" wx:for-item="imgUrl" wx:key="*this">
+          <image 
+            class="post-img {{item.images.length === 1 ? 'single-img' : ''}}" 
+            src="{{imgUrl}}" 
+            mode="aspectFill" 
+            catchtap="previewImage" 
+            data-urls="{{item.images}}" 
+            data-current="{{imgUrl}}"
+          ></image>
+        </block>
+      </view>
+
+      <view class="footer">
+        <view class="tag-box" style="{{item.tagStyle}}">
+          <text># {{item.tagName}}</text>
+        </view>
+
+        <view class="action-box">
+          <view class="action-btn" data-idx="{{index}}">
+              <van-icon class="iconfont"
+  name="{{ item.isLiked ? 'like' : 'like-o' }}" 
+  color="{{ item.isLiked ? '#ee0a24' : '#666' }}" 
+  size="30rpx"
+  custom-style="position: relative; top: -3rpx;"
+/>
+              <text class="count">{{item.like_count || 0}}</text>
+            </view>
+            <view class="action-btn">
+              <text class="iconfont">评论</text>
+              <text class="count">{{item.comment_count || 0}}</text>
+            </view>
+        </view>
+      </view>
+    </view>
+  </block>
+
+  <view class="footer-tip" style="text-align: center; color: #999; font-size: 24rpx; padding: 30rpx 0;">
+    <text wx:if="{{isLoading && posts.length > 0}}">正在加载更多...</text>
+    <text wx:elif="{{!hasMore && posts.length > 0}}">- 到底啦 -</text>
+  </view>
+</view>

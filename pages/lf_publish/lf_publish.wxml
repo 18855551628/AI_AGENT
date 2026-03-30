@@ -1,0 +1,57 @@
+<view class="container">
+  <van-cell-group inset>
+    
+    <picker bindchange="onTypeChange" value="{{ typeIndex }}" range="{{ typeNames }}">
+      <van-cell title="启事类型" is-link required value="{{ typeNames[typeIndex] }}" />
+    </picker>
+
+    <picker bindchange="onCategoryChange" value="{{ categoryIndex }}" range="{{ categoryNames }}">
+      <van-cell title="物品分类" is-link required value="{{ categoryIndex !== -1 ? categoryNames[categoryIndex] : '请选择分类' }}" />
+    </picker>
+
+    <van-field
+      value="{{ title }}"
+      label="标题"
+      placeholder="一句话概括 (如: 图书馆丢失水杯)"
+      required
+      bind:change="onTitleChange"
+    />
+
+    <van-field
+      value="{{ location }}"
+      label="地点"
+      placeholder="丢失或拾取的大致地点"
+      required
+      bind:change="onLocationChange"
+    />
+
+    <picker mode="date" value="{{ date }}" bindchange="onDateChange">
+      <van-cell title="日期" is-link required value="{{ date || '请选择日期' }}" />
+    </picker>
+
+    <van-field
+      value="{{ content }}"
+      label="详细描述"
+      type="textarea"
+      placeholder="描述物品特征、联系方式等..."
+      autosize
+      border="{{ false }}"
+      bind:change="onContentChange"
+    />
+    
+  </van-cell-group>
+
+  <view class="upload-section">
+    <view class="upload-title">添加图片 (选填，最多3张)</view>
+    <van-uploader 
+      file-list="{{ fileList }}" 
+      max-count="3" 
+      bind:after-read="afterRead" 
+      bind:delete="deleteImg" 
+    />
+  </view>
+
+  <view class="submit-btn-box">
+    <van-button type="primary" color="#ffca00" block round bind:click="onSubmit" custom-class="custom-btn">立即发布</van-button>
+  </view>
+</view>

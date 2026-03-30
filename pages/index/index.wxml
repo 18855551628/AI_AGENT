@@ -1,0 +1,168 @@
+<view class="page-wrapper" bindtap="closeTooltip">
+  <view class="banner">
+    <swiper indicator-dots="true" autoplay="true" interval="5000" circular="true">
+      <swiper-item>
+        <image src="/images/banner/ban1.png" mode="widthFix"></image>
+      </swiper-item>
+      <swiper-item>
+        <image src="/images/banner/ban2.png" mode="widthFix"></image>
+      </swiper-item>
+      <swiper-item>
+        <image src="/images/banner/ban3.png" mode="widthFix"></image>
+      </swiper-item>
+    </swiper>
+  </view>
+  
+  <van-notice-bar left-icon="volume-o" text="你的专属校园助手已经上线啦！！！" />
+  
+  <view class="bento-container">
+    <view class="bento-item main-card fortune-card" bindtap="{{ !hasCheckedIn ? 'handleCheckIn' : '' }}">
+      <view class="unchecked-state" wx:if="{{!hasCheckedIn}}">
+        <view class="anim-icon">
+          <van-icon name="gift-o" size="48px" color="#FF6B6B" />
+        </view>
+        <text class="check-title">今日校园运势</text>
+        <view class="check-btn">点击抽取今日好运</view>
+      </view>
+
+      <view class="checked-state" wx:else>
+        <view class="fortune-header">
+          <text class="fortune-title" style="color: {{todayFortune.color}}">{{todayFortune.title}}</text>
+          <view class="points-reward">积分 +{{todayFortune.points}}</view>
+        </view>
+        
+        <view class="fortune-body">
+          <view class="fortune-tag" style="background: {{todayFortune.color}}15; color: {{todayFortune.color}}">
+            {{todayFortune.type}}：{{todayFortune.action}}
+          </view>
+          <view class="fortune-desc">{{todayFortune.desc}}</view>
+        </view>
+        
+        <van-icon name="good-job-o" class="bg-icon-large" style="color: {{todayFortune.color}}" />
+      </view>
+    </view>
+
+    <view class="bento-item sub-card points-card" bindtap="goToMall">
+      <view class="card-top-info">
+        <text class="sub-title-light">我的积分</text>
+        <van-icon name="arrow" size="12px" color="rgba(255,255,255,0.8)" />
+      </view>
+      <view class="count-number points-num">
+        <van-icon name="gold-coin-o" size="24px" class="coin-icon" />
+        {{totalPoints}}
+      </view>
+      <view class="mall-text">兑换中心 ></view>
+    </view>
+
+    <view class="bento-item sub-card streak-card">
+      <view class="streak-header" catchtap="toggleStreakRules">
+        <view class="title-with-icon">
+          <text class="sub-title-light">连续签到</text>
+          <van-icon name="question-o" size="16px" color="#ffffff" custom-style="margin-left: 8rpx; margin-top: 4rpx;" />
+        </view>
+        
+        <view class="rule-tooltip" wx:if="{{showStreakRules}}">
+          第2天起奖励递增(最高+5分)，满7天送30分！
+        </view>
+      </view>
+
+      <view class="streak-info">
+        <text class="count-number">{{streakDays}}</text><text class="unit">天</text>
+      </view>
+      <view class="progress-bar">
+        <view class="progress-inner" style="width: {{(streakDays % 7) / 7 * 100}}"></view>
+      </view>
+      <view class="progress-text">距神秘宝箱还差 {{7 - (streakDays % 7)}} 天</view>
+      <van-icon name="fire-o" class="bg-icon" />
+    </view>
+  </view>
+
+  <view class="tool-grid">
+    <view class="tool-item" bindtap="onToolClick" data-type="map">
+      <view class="icon-bg bg-blue">
+        <van-icon name="location" size="28px" color="#1890ff" />
+      </view>
+      <text>校园地图</text>
+    </view>
+    
+    <view class="tool-item" bindtap="onToolClick" data-type="calendar">
+      <view class="icon-bg bg-purple">
+        <van-icon name="calendar-o" size="28px" color="#722ed1" />
+      </view>
+      <text>校历安排</text>
+    </view>
+    
+    <view class="tool-item" bindtap="onToolClick" data-type="forum">
+      <view class="icon-bg bg-green">
+        <van-icon name="chat-o" size="28px" color="#52c41a" />
+      </view>
+      <text>校园论坛</text>
+    </view>
+
+    <view class="tool-item" bindtap="onToolClick" data-type="ai">
+      <view class="icon-bg bg-orange">
+        <van-icon name="smile-comment-o" size="28px" color="#fa8c16" />
+      </view>
+      <text>智能助手</text>
+    </view>
+  </view>
+
+  <view class="ai-assistant-card">
+    <view class="ai-card-bg"></view> 
+    
+    <view class="ai-header" bindtap="goToAIChat">
+      <view class="ai-title">
+        <van-icon name="chat" size="24px" color="#1890ff" class="ai-icon-pulse" />
+        <text class="title-text">AI 校园全场景助手</text>
+      </view>
+    </view>
+    
+    <block wx:if="{{!aiResponse && !isAiLoading}}">
+      <view class="ai-desc">一句话查课表、找空教室等！</view>
+      <view class="ai-suggestions">
+        <view class="suggestion-pill" bindtap="quickAskInPage" data-query="明天上午哪里有空教室？">
+          <van-icon name="search" size="12px" /> 查空教室
+        </view>
+        <view class="suggestion-pill" bindtap="quickAskInPage" data-query="帮我看一下这个学期的考试信息">
+          <van-icon name="edit" size="12px" /> 查考场
+        </view>
+      </view>
+    </block>
+
+    <view class="ai-response-box" wx:else>
+      <view class="user-query-bubble" wx:if="{{currentQuery}}">
+        <text class="query-text">{{currentQuery}}</text>
+      </view>
+      
+      <view class="ai-answer-bubble" wx:if="{{!isAiLoading}}">
+        <text user-select="true">{{aiResponse}}</text>
+        <view class="ai-actions">
+          <view class="action-btn" bindtap="resetAi">
+            <van-icon name="replay" size="14px" /> 返回
+          </view>
+        </view>
+      </view>
+      
+      <view class="ai-loading-bubble" wx:else>
+        <van-loading type="spinner" size="18px" color="#1890ff" />
+        <text>正在检索全校数据...</text>
+      </view>
+    </view>
+    
+    <view class="ai-real-input">
+      <input 
+        class="real-input" 
+        type="text" 
+        placeholder="向 AI 助手发送指令..." 
+        value="{{aiQuery}}" 
+        bindinput="onAiInput" 
+        bindconfirm="sendAiQuery" 
+        confirm-type="send"
+      />
+      <view class="real-send-btn {{aiQuery.length > 0 ? 'active' : ''}}" bindtap="sendAiQuery">
+        <van-icon name="guide-o" size="18px" color="#fff" />
+      </view>
+    </view>
+  </view>
+
+</view>

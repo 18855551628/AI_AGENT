@@ -1,0 +1,197 @@
+page {
+  background-color: #F5F7FA;
+}
+
+.page-container {
+  padding-bottom: 40rpx;
+}
+
+/* 顶部仪表盘 */
+.dashboard-card {
+  padding: 50rpx 40rpx;
+  border-radius: 0 0 40rpx 40rpx;
+  box-shadow: 0 10rpx 30rpx rgba(79, 123, 252, 0.2);
+  margin-bottom: -40rpx; /* 让下方的卡片往上贴一点，形成层叠效果 */
+  padding-bottom: 80rpx; 
+}
+.bg-gradient {
+  background: linear-gradient(135deg, #4F7BFC 0%, #3058D6 100%);
+  color: white;
+}
+.term-title {
+  font-size: 28rpx;
+  opacity: 0.8;
+  margin-bottom: 30rpx;
+  text-align: center;
+}
+.stats-row {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.stat-value {
+  font-size: 64rpx;
+  font-weight: bold;
+  font-family: 'DIN Alternate', sans-serif; /* 用数字字体更好看 */
+  margin-bottom: 8rpx;
+}
+.stat-label {
+  font-size: 24rpx;
+  opacity: 0.8;
+}
+.stat-divider {
+  width: 2rpx;
+  height: 60rpx;
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+/* 成绩列表区 */
+.content-area {
+  padding: 0 30rpx;
+  position: relative;
+  z-index: 10; /* 浮在仪表盘上方 */
+}
+.grade-list {
+  display: flex;
+  flex-direction: column;
+  gap: 24rpx;
+}
+.grade-card {
+  background: #FFFFFF;
+  border-radius: 24rpx;
+  padding: 30rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.02);
+}
+
+/* 卡片左侧：课程信息 */
+.card-left {
+  flex: 1;
+  padding-right: 20rpx;
+}
+.course-name {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 16rpx;
+  line-height: 1.4;
+}
+.course-tags {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16rpx;
+}
+.credit-text, .teacher-text {
+  font-size: 24rpx;
+  color: #888;
+}
+
+/* 卡片右侧：分数信息 */
+.card-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  min-width: 120rpx;
+}
+.score {
+  font-size: 48rpx;
+  font-weight: bold;
+  font-family: 'DIN Alternate', sans-serif;
+  margin-bottom: 8rpx;
+}
+.gpa {
+  font-size: 24rpx;
+  color: #999;
+}
+
+.score-excellent {
+  color: #07c160; /* 微信绿，代表高分/优秀 */
+}
+.score-fail {
+  color: #ee0a24; /* Vant红，代表挂科/危险 */
+}
+.score-normal {
+  color: #333333; /* 正常黑色 */
+}
+
+
+.filter-section {
+  position: relative;
+  z-index: 20; 
+  margin: 0 30rpx 20rpx 30rpx;
+  border-radius: 16rpx;
+  overflow: hidden; 
+  box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.04);
+}
+
+.custom-dropdown {
+  box-shadow: none !important;
+}
+
+.popup-header {
+  text-align: center;
+  margin-bottom: 30rpx;
+}
+.popup-title {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #333;
+}
+.popup-course-name {
+  font-size: 28rpx;
+  color: #666;
+  margin-bottom: 30rpx;
+  padding: 0 10rpx;
+}
+.popup-course-name .highlight {
+  color: #ee0a24; 
+  font-weight: bold;
+}
+
+.detail-table {
+  border: 2rpx solid #EEEEEE;
+  border-radius: 16rpx;
+  overflow: hidden;
+}
+.table-header {
+  display: flex;
+  background-color: #F8F9FA;
+  border-bottom: 2rpx solid #EEEEEE;
+}
+.th {
+  flex: 1;
+  text-align: center;
+  padding: 20rpx 0;
+  font-size: 26rpx;
+  font-weight: bold;
+  color: #333;
+}
+.table-row {
+  display: flex;
+  border-bottom: 2rpx solid #EEEEEE;
+}
+.table-row:last-child {
+  border-bottom: none;
+}
+.td {
+  flex: 1;
+  text-align: center;
+  padding: 24rpx 0;
+  font-size: 26rpx;
+  color: #555;
+}
+.total-row {
+  background-color: #FAFAFA;
+}
+.score-text {
+  font-weight: bold;
+  color: #4F7BFC; 
+}

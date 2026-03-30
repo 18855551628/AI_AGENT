@@ -1,0 +1,58 @@
+<view class="page-container">
+  
+  <view class="filter-section">
+    <van-dropdown-menu active-color="#4F7BFC" custom-class="custom-dropdown">
+      <van-dropdown-item 
+        value="{{ selectedTerm }}" 
+        options="{{ termOptions }}" 
+        bind:change="onFilterChange" 
+      />
+    </van-dropdown-menu>
+    
+    <view class="result-summary" wx:if="{{ !loading && selectedTerm }}">
+      <text>该学期共有 <text class="highlight-num">{{ examList.length }}</text> 场考试</text>
+    </view>
+  </view>
+
+  <view class="content-area">
+    <van-skeleton title row="6" loading="{{ loading }}">
+      
+      <view class="empty-state" wx:if="{{ examList.length === 0 && !loading }}">
+        <image class="empty-img" src="/images/empty-relax.png" mode="aspectFit" />
+        <text class="empty-text">{{ selectedTerm ? '该学期暂时没有考试安排哦~' : '请先在顶部选择学年学期~' }}</text>
+      </view>
+
+      <view class="exam-list" wx:if="{{ examList.length > 0 }}">
+        <block wx:for="{{ examList }}" wx:key="id">
+          <view class="exam-card">
+            <view class="card-header">
+              <view class="course-name">{{ item.courseName }}</view>
+              <view class="tag {{ item.status === '已结束' ? 'tag-gray' : 'tag-purple' }}">
+                {{ item.status || '未开始' }}
+              </view>
+            </view>
+            
+            <view class="divider"></view>
+
+            <view class="card-body">
+              <view class="info-row">
+                <text class="info-label">考试时间：</text>
+                <text class="info-value">{{ item.examTime }}</text>
+              </view>
+              <view class="info-row">
+                <text class="info-label">考试地点：</text>
+                <text class="info-value location-text">{{ item.location }}</text>
+              </view>
+              <view class="info-row">
+                <text class="info-label">座位号：</text>
+                <text class="info-value seat-text">{{ item.seatNum }} 号</text>
+              </view>
+            </view>
+          </view>
+        </block>
+      </view>
+
+    </van-skeleton>
+  </view>
+
+</view>

@@ -1,0 +1,236 @@
+/* WXSS 文件 */
+
+page {
+  height: 100%;
+  overflow: hidden;
+  background: #f0f2f5;
+}
+
+.login-container {
+  position: relative;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
+}
+
+.circle-bg {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(100rpx); 
+  z-index: 0;
+  pointer-events: none; 
+}
+
+.circle-1 {
+  width: 400rpx; 
+  height: 400rpx;
+  background: #a18cd1;
+  top: -100rpx;
+  left: -100rpx;
+  opacity: 0.6;
+}
+
+.circle-2 {
+  width: 500rpx; /* 原 250px -> 500rpx */
+  height: 500rpx;
+  background: #fbc2eb;
+  bottom: -160rpx;
+  right: -120rpx;
+  opacity: 0.5;
+}
+
+/* 2. 玻璃卡片主体 */
+.login-transition {
+  z-index: 10;
+  width: 640rpx; /* 750 * 0.92 = 690rpx, 相当于原来的 92% */
+  /* 去掉 max-width，或者设得非常大，防止在大屏被限制住 */
+  /* max-width: 1200rpx; */
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(40rpx);
+  -webkit-backdrop-filter: blur(40rpx);
+  
+  border-radius: 48rpx; /* 圆角变大 */
+  
+  /* 内边距：上下 80rpx，左右 40rpx */
+  padding: 80rpx 40rpx; 
+  
+  box-shadow: 0 16rpx 64rpx 0 rgba(31, 38, 135, 0.1);
+  border: 2rpx solid rgba(255, 255, 255, 0.5);
+  box-sizing: border-box;
+}
+
+/* 头部样式 */
+.header {
+  text-align: center;
+  margin-bottom: 80rpx; /* 间距拉大 */
+}
+
+.logo-area {
+  width: 128rpx;  /* 图标容器变大 */
+  height: 128rpx;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 32rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto 32rpx;
+  box-shadow: 0 8rpx 30rpx rgba(118, 75, 162, 0.3);
+}
+
+.app-name {
+  display: block;
+  font-size: 44rpx; /* 字体变大 */
+  font-weight: bold;
+  color: #333;
+  letter-spacing: 2rpx;
+}
+
+.sub-title {
+  font-size: 24rpx;
+  color: #999;
+  margin-top: 12rpx;
+  display: block;
+}
+
+/* 表单区域 */
+.custom-group {
+  background: transparent !important;
+}
+
+.extra-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 30rpx;
+  margin-bottom: 60rpx;
+  font-size: 24rpx;
+  color: #666;
+  padding: 0 16rpx;
+}
+
+.forgot-pwd {
+  color: #667eea;
+}
+
+/* 按钮样式 */
+.btn-area {
+  margin-top: 40rpx;
+}
+
+.login-btn {
+  /* 按钮高度也可以在样式里强制指定，或者让Vant自己撑开 */
+  height: 88rpx !important; 
+  font-size: 32rpx !important;
+  box-shadow: 0 8rpx 30rpx rgba(102, 126, 234, 0.4);
+  margin-bottom: 32rpx !important;
+  font-weight: bold;
+}
+
+.wechat-btn {
+  height: 88rpx !important;
+  font-size: 32rpx !important;
+  background: transparent !important;
+  border: 2rpx solid #dcdfe6 !important;
+  color: #666 !important;
+}
+
+.footer-text {
+  position: absolute;
+  bottom: 60rpx;
+  font-size: 20rpx;
+  color: #ccc;
+  z-index: 10;
+}
+.profile-transition {
+  width: 690rpx;
+  margin-top: -30rpx; /* 距离顶部一点距离 */
+  z-index: 10;
+}
+
+.profile-card {
+  /* 复用 glass-card 的样式，但根据需要微调 */
+  margin-bottom: 30rpx;
+  padding: 20rpx !important;
+}
+
+.user-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 10rpx;
+}
+
+.user-avatar {
+  border: 4rpx solid rgba(255,255,255,0.8);
+  box-shadow: 0 8rpx 20rpx rgba(0,0,0,0.1);
+  margin-bottom: 20rpx;
+}
+
+.user-info{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.nickname {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+.stu-id {
+  font-size: 24rpx;
+  color: #666;
+  margin-top: 8rpx;
+}
+
+/* 数据栏 */
+.data-row {
+  display: flex;
+  justify-content: space-around;
+  padding-top: 30rpx;
+  border-top: 1px solid rgba(0,0,0,0.05);
+}
+
+.data-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.data-item .num {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #667eea;
+}
+
+.data-item .label {
+  font-size: 22rpx;
+  color: #999;
+  margin-top: 6rpx;
+}
+
+/* 菜单卡片 */
+.menu-card {
+  padding: 10rpx 0 !important; /* 菜单不需要太多内边距 */
+  overflow: hidden; /* 防止圆角被子元素遮挡 */
+}
+
+.transparent-group {
+  background: transparent !important;
+}
+
+.van-cell {
+  background: transparent !important; /* 让单元格透出玻璃背景 */
+}
+
+.logout-area{
+  margin-top: 50rpx;
+}

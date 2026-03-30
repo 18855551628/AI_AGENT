@@ -1,0 +1,102 @@
+page {
+  background-color: #f7f8fa;
+}
+
+.msg-list {
+  padding: 20rpx;
+}
+
+.msg-card {
+  display: flex;
+  background: #fff;
+  padding: 24rpx;
+  border-radius: 16rpx;
+  margin-bottom: 20rpx;
+  position: relative;
+}
+
+/* 未读状态稍微高亮一点点背景，或者加左边框 */
+.msg-card.unread {
+  background: #fff; /* 这里可以改微黄醒目 */
+}
+
+.avatar {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 50%;
+  margin-right: 20rpx;
+  flex-shrink: 0;
+}
+
+.content-box {
+  flex: 1;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8rpx;
+}
+
+.nickname {
+  font-size: 28rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+.time {
+  font-size: 22rpx;
+  color: #999;
+}
+
+.comment-text {
+  font-size: 28rpx;
+  color: #333;
+  margin-bottom: 16rpx;
+}
+
+.quote-box {
+  background: #f2f3f5;
+  padding: 12rpx;
+  border-radius: 8rpx;
+  font-size: 24rpx;
+  color: #666;
+  /* 限制原贴只显示一行 */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.dot {
+  position: absolute;
+  top: 24rpx;
+  right: 24rpx;
+  width: 16rpx;
+  height: 16rpx;
+  background: #fa5151;
+  border-radius: 50%;
+}
+
+.delete-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 65px; /* 必须与 WXML 中的 right-width 一致 */
+  height: 100%; /* 撑满卡片高度 */
+  background-color: #ee0a24; /* 红色背景 */
+  color: #fff;
+  font-size: 15px;
+  border-radius: 0 8px 8px 0; /* 如果你的卡片有圆角，这里最好也加上，保持美观 */
+}
+
+.van-swipe-cell {
+  touch-action: pan-y; /* 优化滑动体验 */
+}
+
+.bottom-text {
+  text-align: center;
+  font-size: 24rpx;
+  color: #999;
+  padding: 20rpx 0 40rpx;
+}

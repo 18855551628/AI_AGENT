@@ -1,0 +1,59 @@
+<view class="container" wx:if="{{lf}}">
+  
+  <swiper wx:if="{{lf.imgs && lf.imgs.length > 0}}" class="gallery" indicator-dots="{{lf.imgs.length > 1}}" indicator-active-color="#ffd000" autoplay circular>
+    <block wx:for="{{lf.imgs}}" wx:key="*this">
+      <swiper-item>
+        <image src="{{item}}" mode="aspectFill" class="slide-image" bindtap="onPreviewImage" data-url="{{item}}"></image>
+      </swiper-item>
+    </block>
+  </swiper>
+
+  <view class="info-card main-info">
+    <view class="title-row">
+      <view class="status-tag {{lf.type === 0 ? 'found-tag' : 'lost-tag'}}">
+        {{lf.type === 0 ? '招领' : '寻物'}}
+      </view>
+      <text class="title">{{lf.title}}</text>
+    </view>
+
+    <view class="meta-box">
+      <view class="meta-item">
+        <text class="icon">📍</text>
+        <text class="text">地点：{{lf.location}}</text>
+      </view>
+      <view class="meta-item">
+        <text class="icon">🕒</text>
+        <text class="text">时间：{{lf.date}}</text>
+      </view>
+    </view>
+
+    <view class="view-count">{{lf.view_count || 1}}人看过</view>
+  </view>
+
+  <view class="info-card desc-box">
+    <view class="section-title">详细描述</view>
+    <text class="desc-text" user-select="true">{{lf.content}}</text>
+  </view>
+
+  <view class="info-card seller-box">
+    <image class="avatar" src="{{lf.publisher_info.avatarUrl || '/images/default-avatar.png'}}"></image>
+    <view class="seller-mid">
+      <view class="name">{{lf.publisher_info.nickName}}</view>
+      <view class="tips">热心校园，互帮互助</view>
+    </view>
+  </view>
+
+  <view style="height: 120rpx;"></view>
+
+  <view class="bottom-bar">
+    <button class="action-btn share-btn" open-type="share">
+      <text class="icon">🔗</text>
+      <text>分享</text>
+    </button>
+    
+    <view class="contact-btn" bindtap="onContact">
+      <text>{{lf.type === 0 ? '认领物品 / 提供线索' : '我有线索 / 联系失主'}}</text>
+    </view>
+  </view>
+
+</view>

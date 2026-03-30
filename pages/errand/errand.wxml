@@ -1,0 +1,117 @@
+<view class="page-container">
+  <van-tabs active="{{ activeTab }}" bind:change="onTabChange" color="#4F7BFC" sticky animated swipeable>
+    
+    <van-tab title="跑腿大厅" name="hall">
+      <view class="list-container">
+        <block wx:if="{{ taskList.length > 0 }}">
+          <view class="task-card" wx:for="{{ taskList }}" wx:key="id">
+            <view class="card-header">
+              <van-tag type="primary" color="{{ item.typeColor }}" size="medium">{{ item.typeName }}</van-tag>
+              <text class="reward-text"><text class="rmb">￥</text>{{ item.reward }}</text>
+            </view>
+            <view class="card-body">
+              <view class="desc-text">{{ item.desc }}</view>
+              <view class="route-box">
+                <view class="route-item"><view class="dot dot-green"></view><text class="route-text">取：{{ item.start }}</text></view>
+                <view class="route-item"><view class="dot dot-orange"></view><text class="route-text">送：{{ item.end }}</text></view>
+              </view>
+            </view>
+            <view class="card-footer">
+              <text class="time-text">发布于 {{ item.time }}</text>
+              <van-button size="small" color="#4F7BFC" round data-id="{{item.id}}" bind:click="takeOrder">立即抢单</van-button>
+            </view>
+          </view>
+        </block>
+        <van-empty wx:else description="大厅暂时没有跑腿订单哦~" image="search" />
+      </view>
+    </van-tab>
+
+    <van-tab title="我要发单" name="publish">
+      <view class="form-container">
+        <view class="form-group">
+          <view class="group-title">选择任务类型</view>
+          <van-radio-group value="{{ taskType }}" bind:change="onTaskTypeChange" direction="horizontal">
+            <van-radio name="fetch" checked-color="#4F7BFC" custom-class="radio-item">代取快递</van-radio>
+            <van-radio name="buy" checked-color="#4F7BFC" custom-class="radio-item">帮忙买</van-radio>
+            <van-radio name="deliver" checked-color="#4F7BFC" custom-class="radio-item">帮忙送</van-radio>
+          </van-radio-group>
+        </view>
+
+        <view class="form-group custom-field-group">
+          <van-field value="{{ startAddress }}" label="取货地点" placeholder="如：菜鸟驿站 / 食堂" bind:change="onInput" data-field="startAddress" />
+          <van-field value="{{ endAddress }}" label="送达地点" placeholder="如：A栋 301" bind:change="onInput" data-field="endAddress" />
+          <van-field value="{{ taskDesc }}" label="任务要求" type="textarea" autosize placeholder="详细描述物品信息..." bind:change="onInput" data-field="taskDesc" />
+          <van-field value="{{ reward }}" label="赏金(元)" type="digit" placeholder="输入跑腿小费" bind:change="onInput" data-field="reward" />
+        </view>
+
+        <view class="submit-btn-wrap">
+          <van-button block color="#4F7BFC" round size="large" bind:click="submitTask">确认支付并发布</van-button>
+        </view>
+      </view>
+    </van-tab>
+
+    <van-tab title="我发布的" name="my_published">
+      <view class="list-container">
+        <block wx:if="{{ myPublishedList.length > 0 }}">
+          <view class="task-card" wx:for="{{ myPublishedList }}" wx:key="id">
+            <view class="card-header">
+              <view class="title-left">
+                <van-tag type="primary" color="{{ item.typeColor }}" size="medium">{{ item.typeName }}</van-tag>
+                <text class="status-text" style="color: {{item.statusColor}}">{{ item.status }}</text>
+              </view>
+              <text class="reward-text"><text class="rmb">￥</text>{{ item.reward }}</text>
+            </view>
+            <view class="card-body">
+              <view class="desc-text">{{ item.desc }}</view>
+              <view class="route-box">
+                <view class="route-item"><view class="dot dot-green"></view><text class="route-text">取：{{ item.start }}</text></view>
+                <view class="route-item"><view class="dot dot-orange"></view><text class="route-text">送：{{ item.end }}</text></view>
+              </view>
+            </view>
+            <view class="card-footer">
+              <text class="time-text">{{ item.time }}</text>
+              <view class="action-btns">
+                <van-button wx:if="{{item.status === '待接单'}}" size="small" plain type="danger" round data-id="{{item.id}}" bind:click="cancelOrder">取消订单</van-button>
+                <van-button wx:if="{{item.status === '进行中'}}" size="small" color="#00C853" round custom-style="margin-left:16rpx" data-id="{{item.id}}" bind:click="finishOrder">确认已送达</van-button>
+              </view>
+            </view>
+          </view>
+        </block>
+        <van-empty wx:else description="你还没有发布过跑腿订单哦~" />
+      </view>
+    </van-tab>
+
+    <van-tab title="我接单的" name="my_accepted">
+      <view class="list-container">
+        <block wx:if="{{ myAcceptedList.length > 0 }}">
+          <view class="task-card" wx:for="{{ myAcceptedList }}" wx:key="id">
+            <view class="card-header">
+              <view class="title-left">
+                <van-tag type="primary" color="{{ item.typeColor }}" size="medium">{{ item.typeName }}</van-tag>
+                <text class="status-text" style="color: {{item.statusColor}}">{{ item.status }}</text>
+              </view>
+              <text class="reward-text"><text class="rmb">￥</text>{{ item.reward }}</text>
+            </view>
+            <view class="card-body">
+              <view class="desc-text">{{ item.desc }}</view>
+              <view class="route-box">
+                <view class="route-item"><view class="dot dot-green"></view><text class="route-text">取：{{ item.start }}</text></view>
+                <view class="route-item"><view class="dot dot-orange"></view><text class="route-text">送：{{ item.end }}</text></view>
+              </view>
+            </view>
+            <view class="card-footer">
+              <text class="time-text">接单于 {{ item.time }}</text>
+              <view class="action-btns">
+                <van-button size="small" plain color="#4F7BFC" round data-publisher="{{item.publisherId}}" bind:click="contactUser">联系雇主</van-button>
+              </view>
+            </view>
+          </view>
+        </block>
+        <van-empty wx:else description="你还没有接过跑腿订单哦~" />
+      </view>
+    </van-tab>
+
+  </van-tabs>
+  
+  <van-toast id="van-toast" />
+</view>

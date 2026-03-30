@@ -1,0 +1,39 @@
+page {
+  /* 页面底色，和你的二手市场保持一致 */
+  background-color: #f7f8fa;
+  padding-top: 20rpx;
+  padding-bottom: 60rpx;
+}
+
+/* --- 修复原生 picker 嵌套可能出现的宽度问题 --- */
+picker {
+  display: block;
+  width: 100%;
+}
+
+/* --- 图片上传区样式 --- */
+.upload-section {
+  margin: 30rpx 30rpx;
+  padding: 30rpx;
+  background-color: #fff;
+  border-radius: 16rpx;
+}
+
+.upload-title {
+  font-size: 28rpx;
+  color: #333;
+  margin-bottom: 20rpx;
+}
+
+/* --- 底部按钮区样式 --- */
+.submit-btn-box {
+  margin: 60rpx 40rpx;
+}
+
+/* 自定义 Vant 按钮里面的文字样式 */
+.custom-btn {
+  color: #333 !important; /* 黄底黑字更搭 */
+  font-weight: bold;
+  font-size: 32rpx;
+  box-shadow: 0 8rpx 20rpx rgba(255, 200, 0, 0.3); /* 加一点发光阴影提升质感 */
+}

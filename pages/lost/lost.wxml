@@ -1,0 +1,72 @@
+<view class="container">
+  <view class="header-box">
+    <view class="search-bar">
+      <icon type="search" size="16" color="#999"></icon>
+      <input class="search-input" placeholder="搜启事：校园卡 / 黑伞" confirm-type="search" bindconfirm="onSearch" bindinput="onSearchInput" value="{{searchKeyword}}" />
+    </view>
+    <view class="search-btn" bindtap="onSearch">搜索</view>
+  </view>
+
+  <view class="category-scroll-box">
+    <scroll-view scroll-x="true" class="category-scroll" enable-flex="true">
+      <block wx:for="{{categories}}" wx:key="id">
+        <view class="category-item {{activeCategory === item.id ? 'active' : ''}}" bindtap="onCategoryTap" data-id="{{item.id}}">
+          <text>{{item.name}}</text>
+          <view class="dot" wx:if="{{activeCategory === item.id}}"></view>
+        </view>
+      </block>
+    </scroll-view>
+  </view>
+
+  <view wx:if="{{lfList.length === 0}}" class="empty-state">
+    <text>太棒了，校园里目前没有遗失物品~</text>
+  </view>
+
+  <view class="waterfall-container" wx:else>
+    <block wx:for="{{lfList}}" wx:key="_id">
+      <view class="goods-card" bindtap="toDetail" data-id="{{item._id}}">
+
+        <view class="img-box">
+          <image src="{{item.imgs[0] || '/images/default_lf.png'}}" mode="widthFix" class="goods-img" lazy-load="true"></image>
+          
+          <view class="tags-container">
+            <view class="status-tag {{item.type === 0 ? 'found-tag' : 'lost-tag'}}">
+              {{item.type === 0 ? '招领' : '寻物'}}
+            </view>
+          </view>
+        </view>
+
+        <view class="content-box">
+          <view class="title">{{item.title}}</view>
+
+          <view class="info-row">
+             <text class="icon">📍</text>
+             <text class="info-text">{{item.location || '地点未知'}}</text>
+          </view>
+          <view class="info-row">
+             <text class="icon">🕒</text>
+             <text class="info-text">{{item.date || '时间未知'}}</text>
+          </view>
+
+          <view class="seller-info">
+            <view class="seller-left">
+              <image src="{{item.publisher_info.avatarUrl}}" class="avatar"></image>
+              <text class="seller-name">{{item.publisher_info.nickName}}</text>
+            </view>
+          </view>
+        </view>
+
+      </view>
+    </block>
+  </view>
+
+  <view class="fab-btn" bindtap="onPublish">
+    <text class="plus-icon">+</text>
+    <text class="fab-text">发启事</text>
+  </view>
+
+  <view class="fab-btn my-btn" bindtap="toMyPosts">
+    <text class="icon">👤</text>
+    <text class="fab-text">我的</text>
+  </view>
+</view>

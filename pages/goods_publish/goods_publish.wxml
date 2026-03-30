@@ -1,0 +1,102 @@
+<view class="container">
+  
+  <view class="section-card">
+    <input 
+  class="input-title" 
+  placeholder="品牌型号 + 关键特点（如：99新 iPad Air5）" 
+  placeholder-class="ph-style" 
+  bindinput="onInputTitle" 
+  value="{{title}}" 
+/>
+    
+<textarea 
+  class="input-desc" 
+  placeholder="描述一下宝贝的细节、入手渠道、转手原因..." 
+  placeholder-class="ph-style" 
+  maxlength="200" 
+  bindinput="onInputDesc" 
+  value="{{desc}}"
+></textarea>
+    
+    <view class="img-grid">
+      <block wx:for="{{tempImgs}}" wx:key="*this">
+        <view class="img-item">
+          <image src="{{item}}" mode="aspectFill"></image>
+          <view class="del-btn" catchtap="onDelImg" data-index="{{index}}">×</view>
+        </view>
+      </block>
+      <view class="upload-btn" bindtap="onChooseImg" wx:if="{{tempImgs.length < 9}}">
+        <text class="icon">+</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="section-card">
+    <view class="form-row">
+      <text class="label">卖多少</text>
+      <view class="price-input-box">
+  <text>¥</text>
+  <input 
+    type="digit" 
+    placeholder="0.00" 
+    bindinput="onInputPrice" 
+    value="{{price}}" 
+  />
+</view>
+    </view>
+    <view class="form-row">
+      <text class="label">原价(选填)</text>
+      <view class="price-input-box gray">
+  <text>¥</text>
+  <input 
+    type="digit" 
+    placeholder="0.00" 
+    bindinput="onInputOriginalPrice" 
+    value="{{originalPrice}}" 
+  />
+</view>
+    </view>
+  </view>
+
+  <view class="section-card">
+    <view class="section-title">选择分类 <text class="required">*</text></view>
+    <view class="tag-wrap">
+      <block wx:for="{{categories}}" wx:key="*this">
+        <view 
+          class="choice-tag {{selectedCategory === item ? 'active' : ''}}" 
+          bindtap="onSelectCategory" 
+          data-value="{{item}}">
+          {{item}}
+        </view>
+      </block>
+    </view>
+  </view>
+
+  <view class="section-card">
+    <view class="section-title">快捷标签 <text class="sub-text">(最多选3个)</text></view>
+    <view class="tag-wrap">
+      <block wx:for="{{tagsOptions}}" wx:key="*this">
+        <view 
+          class="choice-tag {{item.selected ? 'active' : ''}}" 
+          bindtap="onSelectTag" 
+          data-index="{{index}}">
+          {{item.name}}
+        </view>
+      </block>
+    </view>
+    <view class="form-row">
+    <text class="label">联系方式 <text class="required">*</text></text>
+    <input 
+  class="input-right" 
+  placeholder="例：wx号: happy_123 / 手机号" 
+  placeholder-class="ph-style" 
+  bindinput="onInputContact" 
+  value="{{contactInfo}}" 
+/>
+  </view>
+  </view>
+
+  <view class="footer-bar">
+    <view class="publish-btn" bindtap="submitForm">确认发布</view>
+  </view>
+</view>

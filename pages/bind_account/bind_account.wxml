@@ -1,0 +1,51 @@
+<view class="page-container">
+  
+  <view class="header">
+    <text class="title">连接教务系统</text>
+    <text class="subtitle">一次绑定，解锁课表、成绩、考场等全部校园专属功能</text>
+  </view>
+
+  <view class="form-card">
+    <van-field
+      value="{{ studentId }}"
+      clearable
+      label="学号"
+      placeholder="请输入教务系统学号"
+      bind:change="onIdChange"
+      size="large"
+    />
+
+    <van-field
+      value="{{ password }}"
+      type="password"
+      label="密码"
+      placeholder="请输入教务系统密码"
+      border="{{ false }}"
+      bind:change="onPwdChange"
+      size="large"
+    />
+  </view>
+
+  <view class="btn-wrap">
+    <van-button 
+      type="info" 
+      block 
+      round 
+      size="large" 
+      color="linear-gradient(135deg, #4A90E2 0%, #50E3C2 100%)"
+      loading="{{ isSubmitting }}" 
+      loading-text="正在验证身份..."
+      bind:click="onSubmit"
+    >
+      授权并绑定
+    </van-button>
+  </view>
+
+  <view class="privacy-tip">
+    <text class="tip-icon">🛡️</text>
+    <text>安全承诺：您的账号信息仅加密存储于手机本地，仅用于向教务系统请求数据，我们绝不上传至任何第三方云端。</text>
+  </view>
+
+  <van-toast id="van-toast" />
+
+</view>

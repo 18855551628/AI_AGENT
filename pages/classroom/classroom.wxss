@@ -1,0 +1,145 @@
+page {
+  background-color: #F4F6F9;
+}
+.page-container {
+  padding-bottom: 40rpx;
+}
+/* 筛选区悬浮置顶 */
+.filter-section {
+  position: sticky;
+  top: 0;
+  z-index: 99;
+  background: #fff;
+  box-shadow: 0 4rpx 12rpx rgba(0,0,0,0.04);
+}
+.result-summary {
+  padding: 16rpx 30rpx;
+  background: #F8F9FA;
+  font-size: 24rpx;
+  color: #666;
+  text-align: center;
+  border-top: 2rpx solid #eee;
+}
+.highlight-num {
+  color: #4F7BFC;
+  font-weight: bold;
+  font-size: 28rpx;
+  margin: 0 6rpx;
+}
+/* 列表区 */
+.content-area {
+  padding: 24rpx 30rpx;
+}
+.room-card {
+  background: #fff;
+  border-radius: 24rpx;
+  padding: 30rpx;
+  margin-bottom: 24rpx;
+  box-shadow: 0 4rpx 16rpx rgba(0,0,0,0.03);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-left: 8rpx solid #4F7BFC;
+}
+.card-left {
+  flex: 1;
+}
+.room-name {
+  font-size: 34rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 12rpx;
+}
+.room-building {
+  font-size: 24rpx;
+  color: #888;
+}
+.card-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 12rpx;
+}
+/* 精美的彩色标签 */
+.tag {
+  font-size: 20rpx;
+  padding: 6rpx 16rpx;
+  border-radius: 12rpx;
+  font-weight: bold;
+}
+.tag-purple {
+  background: #F3E5F5;
+  color: #8E24AA;
+}
+.tag-green {
+  background: #E8F5E9;
+  color: #2E7D32;
+}
+/* 空状态插画 */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 100rpx;
+}
+.empty-img {
+  width: 240rpx;
+  height: 200rpx;
+  margin-bottom: 30rpx;
+  opacity: 0.9;
+}
+.empty-text {
+  font-size: 26rpx;
+  color: #999;
+}
+
+.section-panel {
+  padding: 30rpx;
+  background: #fff;
+}
+.section-subtitle {
+  font-size: 26rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 20rpx;
+  margin-top: 20rpx;
+}
+.section-subtitle:first-child {
+  margin-top: 0;
+}
+.section-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20rpx;
+}
+/* 每一个数字小方块 */
+.sec-btn {
+  width: 80rpx;
+  height: 80rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #F4F6F9;
+  color: #555;
+  border-radius: 16rpx;
+  font-size: 28rpx;
+  font-weight: bold;
+  transition: all 0.2s;
+}
+/* 选中后的高亮状态 */
+.sec-btn.active {
+  background: #4F7BFC;
+  color: #fff;
+  box-shadow: 0 4rpx 12rpx rgba(79, 123, 252, 0.3);
+}
+.sec-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 40rpx;
+  padding-top: 20rpx;
+  border-top: 2rpx solid #eee;
+}
+.action-btn {
+  width: 300rpx !important;
+  border-radius: 12rpx !important;
+}

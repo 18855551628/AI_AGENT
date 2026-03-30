@@ -1,0 +1,84 @@
+<view class="login-container">
+  <view class="circle-bg circle-1"></view>
+  <view class="circle-bg circle-2"></view>
+
+  <van-transition 
+    show="{{ !isLoggedIn }}" 
+    name="slide-up" 
+    custom-class="login-transition"
+    wx:if="{{ !isLoggedIn }}"
+  >
+    <view class="glass-card">
+       <view class="header">
+          <view class="logo-area">
+            <van-icon name="wap-home-o" size="80rpx" color="#fff" />
+          </view>
+          <text class="app-name">校园助手</text>
+       </view>
+       <van-button round block icon="wechat" bind:click="handleWechatLogin">微信一键授权</van-button>
+    </view>
+  </van-transition>
+
+
+  <van-transition 
+    show="{{ isLoggedIn }}" 
+    name="fade" 
+    custom-class="profile-transition"
+    wx:else
+  >
+    <view class="glass-card profile-card">
+      <view class="user-header">
+        <van-image 
+          round 
+          width="140rpx" 
+          height="140rpx" 
+          src="{{ userInfo.avatarUrl }}" 
+          fit="cover"
+          custom-class="user-avatar"
+        />
+        <view class="user-info">
+          <text class="nickname">{{ userInfo.nickName }}</text>
+          <text class="stu-id">{{userInfo.college}} | {{userInfo.grade}}</text>
+        </view>
+      </view>
+
+      <view class="data-row">
+        <view class="data-item">
+          <text class="num">{{myPoints}}</text>
+          <text class="label">我的积分</text>
+        </view>
+        <view class="data-item">
+          <text class="num">{{errandIncome}}</text>
+          <text class="label">跑腿收益</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="menu-card glass-card">
+      <van-cell-group border="{{ false }}" custom-class="transparent-group">
+        <van-cell title="我的资料" icon="user" link-type="navigateTo" is-link url="/pages/user_info/user_info"/>
+        <van-cell title="我的课表" icon="notes-o" is-link url="/pages/schedule/schedule" />
+        <van-cell title="我的帖子" icon="chart-trending-o" is-link url="/pages/myPosts/myPosts"/>
+        <van-cell title="我的消息" icon="envelop-o" is-link url="/pages/myMessages/myMessages">
+  <view wx:if="{{hasUnread}}" style="display: inline-block; background: #fa5151; color: white; font-size: 20rpx; padding: 0rpx 12rpx; border-radius: 20rpx; margin-left: 10rpx;">
+    {{unreadCount}}
+  </view>
+</van-cell>
+        <van-cell title="关于我们" icon="info-o" is-link bind:click="showAboutUs" />
+      </van-cell-group>
+    </view>
+
+    <view class="logout-area">
+      <van-button 
+        round 
+        block 
+        color="#fa5151" 
+        bind:click="handleLogout"
+        custom-style="opacity: 0.8;"
+      >
+        退出登录
+      </van-button>
+    </view>
+  </van-transition>
+
+</view>

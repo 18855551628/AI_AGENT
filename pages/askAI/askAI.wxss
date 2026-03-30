@@ -1,0 +1,157 @@
+page {
+  background-color: #F4F6F9;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.chat-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+/* 聊天列表区 */
+.chat-list {
+  flex: 1;
+  padding: 30rpx;
+  box-sizing: border-box;
+}
+
+.scroll-pad {
+  height: 40rpx;
+}
+
+/* 消息行基础布局 */
+.msg-row {
+  display: flex;
+  margin-bottom: 40rpx;
+  align-items: flex-start;
+}
+
+.msg-left {
+  justify-content: flex-start;
+}
+
+.msg-right {
+  justify-content: flex-end;
+}
+
+/* 头像样式 */
+.avatar {
+  width: 72rpx;
+  height: 72rpx;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  box-shadow: 0 4rpx 12rpx rgba(0,0,0,0.1);
+}
+
+.ai-avatar {
+  background: #fff;
+  margin-right: 20rpx;
+  overflow: hidden;
+}
+
+.user-avatar {
+  background: #333;
+  margin-left: 20rpx;
+  overflow: hidden;
+}
+
+.avatar-img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+
+/* 气泡样式 */
+.bubble {
+  max-width: 65%;
+  padding: 24rpx 30rpx;
+  font-size: 30rpx;
+  line-height: 1.6;
+  word-wrap: break-word;
+}
+
+.ai-bubble {
+  background: #fff;
+  color: #333;
+  border-radius: 4rpx 30rpx 30rpx 30rpx;
+  box-shadow: 0 4rpx 16rpx rgba(0,0,0,0.03);
+}
+
+.user-bubble {
+  background: linear-gradient(135deg, #1890ff 0%, #40a9ff 100%);
+  color: #fff;
+  border-radius: 30rpx 4rpx 30rpx 30rpx;
+  box-shadow: 0 4rpx 16rpx rgba(24,144,255,0.2);
+}
+
+.typing-bubble {
+  display: flex;
+  align-items: center;
+  color: #1890ff;
+  font-size: 26rpx;
+}
+
+/* 底部输入区 */
+.input-bar {
+  display: flex;
+  align-items: center;
+  padding: 20rpx 30rpx 40rpx 30rpx;
+  background: #fff;
+  box-shadow: 0 -4rpx 20rpx rgba(0,0,0,0.04);
+}
+
+.input-wrap {
+  flex: 1;
+  background: #f0f2f5;
+  border-radius: 40rpx;
+  padding: 16rpx 30rpx;
+  margin-right: 20rpx;
+}
+
+.chat-input {
+  font-size: 30rpx;
+  height: 48rpx;
+  color: #333;
+}
+
+.send-btn {
+  width: 120rpx;
+  height: 70rpx;
+  border-radius: 35rpx;
+  background: #d9d9d9;
+  color: #fff;
+  font-size: 28rpx;
+  font-weight: 500;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.3s;
+}
+
+.send-btn.active {
+  background: linear-gradient(135deg, #40a9ff 0%, #1890ff 100%);
+  box-shadow: 0 4rpx 12rpx rgba(24,144,255,0.3);
+}
+
+.send-btn.active:active {
+  transform: scale(0.9);
+}
+
+.login-prompt {
+  flex: 1;
+  background: #1890ff;
+  color: #fff;
+  height: 80rpx;
+  border-radius: 40rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 30rpx;
+  box-shadow: 0 4rpx 12rpx rgba(24,144,255,0.3);
+}

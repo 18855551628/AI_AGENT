@@ -1,0 +1,118 @@
+page { 
+  background: #f7f8fa; 
+  padding: 20rpx; 
+}
+
+.empty-tip {
+  text-align: center;
+  color: #999;
+  font-size: 28rpx;
+  margin-top: 100rpx;
+}
+
+.manage-card {
+  background: #fff;
+  border-radius: 16rpx;
+  margin-bottom: 20rpx;
+  padding: 20rpx;
+  box-shadow: 0 4rpx 12rpx rgba(0,0,0,0.03);
+}
+
+.card-main { 
+  display: flex; 
+  margin-bottom: 20rpx; 
+}
+
+.thumb { 
+  width: 140rpx; 
+  height: 140rpx; 
+  border-radius: 10rpx; 
+  margin-right: 20rpx; 
+  background: #eee; 
+  flex-shrink: 0;
+}
+
+.info { 
+  flex: 1; 
+  display: flex; 
+  flex-direction: column; 
+  justify-content: space-between; 
+  overflow: hidden;
+}
+
+/* 标题和标签同行展示 */
+.title-row {
+  display: flex;
+  align-items: flex-start;
+}
+.tag {
+  font-size: 20rpx;
+  padding: 4rpx 10rpx;
+  border-radius: 6rpx;
+  color: #fff;
+  margin-right: 12rpx;
+  margin-top: 4rpx;
+  white-space: nowrap;
+}
+.tag-found { background: #07c160; }
+.tag-lost { background: #ee0a24; }
+
+.title { 
+  font-size: 30rpx; 
+  font-weight: bold; 
+  color: #333; 
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  flex: 1;
+}
+
+.meta { 
+  font-size: 26rpx; 
+  color: #666; 
+  margin-top: 10rpx;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.status { 
+  font-size: 24rpx; 
+  color: #999; 
+}
+
+.action-bar {
+  display: flex;
+  justify-content: flex-end;
+  border-top: 1rpx solid #f5f5f5;
+  padding-top: 20rpx;
+}
+
+/* 按钮样式 */
+.btn {
+  padding: 10rpx 30rpx;
+  border-radius: 30rpx;
+  font-size: 26rpx;
+  margin-left: 20rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.off-shelf {
+  background: #fff7e6;
+  color: #fa8c16;
+  border: 1rpx solid #ffd591;
+}
+
+.on-shelf {
+  background: #f6ffed;
+  color: #52c41a;
+  border: 1rpx solid #b7eb8f;
+}
+
+.del-btn {
+  color: #999;
+  border: 1rpx solid #ddd;
+  background: #fff;
+}

@@ -1,0 +1,91 @@
+<view class="page-container">
+  <view class="header">
+    <text class="title">成绩预估系统</text>
+    <text class="subtitle">分数仅供参考</text>
+  </view>
+
+  <van-tabs active="{{ activeTab }}" bind:change="onTabChange" color="#1890ff" title-active-color="#1890ff" animated swipeable>
+    
+    <van-tab title="四级估分" name="cet4">
+      <view class="tab-content">
+        <van-cell-group inset title="四级听力 (折合满分 248.5)">
+          <van-cell title="短篇新闻 (共7题，每题7.1分)">
+            <van-stepper slot="right-icon" value="{{c4_l1}}" bind:change="onC4L1" max="7" min="0" integer />
+          </van-cell>
+          <van-cell title="长对话 (共8题，每题7.1分)">
+            <van-stepper slot="right-icon" value="{{c4_l2}}" bind:change="onC4L2" max="8" min="0" integer />
+          </van-cell>
+          <van-cell title="听力篇章 (共10题，每题14.2分)">
+            <van-stepper slot="right-icon" value="{{c4_l3}}" bind:change="onC4L3" max="10" min="0" integer />
+          </van-cell>
+        </van-cell-group>
+
+        <template is="shared-form" data="{{ r1: c4_r1, r2: c4_r2, r3: c4_r3, w: c4_w, level: '4' }}" />
+      </view>
+    </van-tab>
+
+    <van-tab title="六级估分" name="cet6">
+      <view class="tab-content">
+        <van-cell-group inset title="六级听力 (折合满分 248.5)">
+          <van-cell title="长对话 (共8题，每题7.1分)">
+            <van-stepper slot="right-icon" value="{{c6_l1}}" bind:change="onC6L1" max="8" min="0" integer />
+          </van-cell>
+          <van-cell title="听力篇章 (共7题，每题7.1分)">
+            <van-stepper slot="right-icon" value="{{c6_l2}}" bind:change="onC6L2" max="7" min="0" integer />
+          </van-cell>
+          <van-cell title="讲话/报道/讲座 (共10题，每题14.2分)">
+            <van-stepper slot="right-icon" value="{{c6_l3}}" bind:change="onC6L3" max="10" min="0" integer />
+          </van-cell>
+        </van-cell-group>
+
+        <template is="shared-form" data="{{ r1: c6_r1, r2: c6_r2, r3: c6_r3, w: c6_w, level: '6' }}" />
+      </view>
+    </van-tab>
+
+  </van-tabs>
+
+  <view class="button-wrap">
+    <van-button type="info" block bind:click="calculateScore">立即估分</van-button>
+  </view>
+
+  <view class="tips-box">
+    <view class="tips-title">【注意事项与算法说明】</view>
+    <view class="tips-text">1. 结果仅供参考：四六级官方采用“常模正态赋分制”。受试卷难度与当次考生整体水平影响，真实成绩会有所浮动，本系统不代表最终成绩。</view>
+    <view class="tips-text">2. 算法规则：四六级均采用官方常模转换对照表算法（根据题型分值折算个数：7.1分为1个单元，满35个单元为249分），能极大程度还原最终成绩单上的真实分数。</view>
+  </view>
+
+  <van-popup show="{{ showResult }}" round closeable position="bottom" custom-style="height: 40%" bind:close="onCloseResult">
+    <view class="result-box">
+      <text class="result-label">最终预估成绩 (CET-{{activeTab === 'cet4' ? '4' : '6'}})</text>
+      <text class="result-value {{totalScore >= 425 ? 'is-pass' : 'is-fail'}}">{{totalScore}}</text>
+      <text class="result-desc" wx:if="{{totalScore >= 425}}">当前分数已达到 425 分及格线</text>
+      <text class="result-desc" wx:else>当前分数未达到 425 分及格线</text>
+    </view>
+  </van-popup>
+</view>
+
+<template name="shared-form">
+  <van-cell-group inset title="阅读部分 (折合满分 248.5)">
+    <van-cell title="选词填空 (共10题，每题3.55分)">
+      <van-stepper slot="right-icon" value="{{r1}}" data-level="{{level}}" data-type="r1" bind:change="onChangeShared" max="10" min="0" integer />
+    </van-cell>
+    <van-cell title="长篇阅读 (共10题，每题7.1分)">
+      <van-stepper slot="right-icon" value="{{r2}}" data-level="{{level}}" data-type="r2" bind:change="onChangeShared" max="10" min="0" integer />
+    </van-cell>
+    <van-cell title="仔细阅读 (共10题，每题14.2分)">
+      <van-stepper slot="right-icon" value="{{r3}}" data-level="{{level}}" data-type="r3" bind:change="onChangeShared" max="10" min="0" integer />
+    </van-cell>
+  </van-cell-group>
+
+  <van-cell-group inset title="写作与翻译 (卷面满分 30，折合满分 213)">
+    <van-field
+      value="{{w}}"
+      type="number"
+      label="预估得分"
+      placeholder="请输入卷面预估分(0-30)"
+      input-align="right"
+      data-level="{{level}}"
+      bind:change="onChangeWriting"
+    />
+  </van-cell-group>
+</template>

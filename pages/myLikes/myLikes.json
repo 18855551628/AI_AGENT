@@ -1,0 +1,9 @@
+{
+  "usingComponents": {
+    "van-icon": "@vant/weapp/icon/index"
+  },
+  "enablePullDownRefresh": true,
+  "backgroundTextStyle": "dark", 
+  "backgroundColor": "#f7f8fa",
+  "navigationBarTitleText": "我的喜欢"
+}

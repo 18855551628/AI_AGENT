@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "寻找搭子",
+  "enablePullDownRefresh": true,
+  "backgroundColor": "#F8F9FC",
+  "usingComponents": {
+    "van-icon": "@vant/weapp/icon/index"
+  }
+}

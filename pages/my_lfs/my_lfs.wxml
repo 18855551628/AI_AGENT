@@ -1,0 +1,40 @@
+<view class="container">
+  <view wx:if="{{myList.length === 0}}" class="empty-tip">
+    你还没有发布过启事哦~
+  </view>
+
+  <block wx:for="{{myList}}" wx:key="_id">
+    <view class="manage-card">
+      <view class="card-main" bindtap="toDetail" data-id="{{item._id}}">
+        <image class="thumb" src="{{item.imgs[0] || '/images/default_lf.png'}}" mode="aspectFill"></image>
+        
+        <view class="info">
+          <view class="title-row">
+            <text class="tag {{item.type === 0 ? 'tag-found' : 'tag-lost'}}">{{item.type === 0 ? '招领' : '寻物'}}</text>
+            <text class="title">{{item.title}}</text>
+          </view>
+          
+          <view class="meta">📍 {{item.location}}</view>
+          
+          <view class="status">
+            浏览 {{item.view_count || 0}} · {{item.status === 1 ? '寻找中' : '已解决'}}
+          </view>
+        </view>
+      </view>
+      
+      <view class="action-bar">
+        <view 
+          class="btn status-btn {{item.status === 1 ? 'off-shelf' : 'on-shelf'}}" 
+          catchtap="onUpdateStatus" 
+          data-id="{{item._id}}" 
+          data-index="{{index}}"
+          data-status="{{item.status}}"
+        >
+          {{item.status === 1 ? '标记解决' : '重新寻找'}}
+        </view>
+
+        <view class="btn del-btn" catchtap="onDelete" data-id="{{item._id}}" data-index="{{index}}">删除</view>
+      </view>
+    </view>
+  </block>
+</view>

@@ -1,0 +1,63 @@
+<view class="container">
+  <van-empty wx:if="{{ msgs.length === 0 }}" description="暂无消息" />
+
+  <view class="msg-list">
+    <block wx:for="{{msgs}}" wx:key="_id">
+      
+      <van-swipe-cell 
+        right-width="{{ 65 }}" 
+        async-close 
+        bind:close="onDeleteMsg" 
+        data-id="{{item._id}}"
+        data-index="{{index}}"
+      >
+        
+        <view 
+          class="msg-card {{!item.isRead ? 'unread' : ''}}" 
+          bindtap="onReadAndGo" 
+          data-item="{{item}}"
+          data-index="{{index}}"
+        >
+          <image class="avatar" src="{{item.avatarUrl}}" mode="aspectFill"></image>
+          
+          <view class="content-box">
+            <view class="header">
+              <text class="nickname">{{item.nickName}}</text>
+              <text class="time">{{item.timeString}}</text>
+            </view>
+            
+            <block wx:if="{{item.type === 'partner_apply'}}">
+              <view class="comment-text">{{item.content}}</view>
+              <view class="quote-box">
+                <text>搭子：{{item.postContent}}</text>
+                <!-- 这里不再直接显示微信号，而是让用户去搭子管理页同意 -->
+              </view>
+            </block>
+
+            <block wx:elif="{{item.type === 'partner_accept'}}">
+              <view class="comment-text" style="color:#07c160;">{{item.content}}</view>
+              <view class="quote-box">
+                <text>搭子：{{item.postContent}}</text>
+              </view>
+            </block>
+
+            <block wx:else>
+              <view class="comment-text">回复了你：{{item.content}}</view>
+              <view class="quote-box">
+                <text>原贴：{{item.postContent}}</text>
+              </view>
+            </block>
+          </view>
+
+          <view class="dot" wx:if="{{!item.isRead}}"></view>
+        </view>
+
+        <view slot="right" class="delete-btn">删除</view>
+      
+      </van-swipe-cell>
+    </block>
+  </view>
+
+  <view wx:if="{{ msgs.length > 0 && isLoading }}" class="bottom-text">加载中...</view>
+  <view wx:if="{{ msgs.length > 0 && !hasMore }}" class="bottom-text">没有更多消息了</view>
+</view>

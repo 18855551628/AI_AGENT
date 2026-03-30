@@ -1,0 +1,297 @@
+page {
+  background-color: #f7f8fa; /* 全局浅灰背景 */
+  min-height: 100vh;
+}
+
+/* 页面内容容器：让内容自然流式排布 */
+.page-container {
+  padding-bottom: 20rpx;
+  background-color: #f7f8fa;
+  overflow: visible
+}
+.sticky-header {
+  position: -webkit-sticky; 
+  position: sticky;         /* 吸顶核心 */
+  top: 0;                   /* 顶到屏幕最上缘 */
+  z-index: 999;             /* 层级一定要高，压住下面的帖子 */
+  background-color: #ffffff !important; /* 【关键】必须是纯白，且加 !important 防止被覆盖 */
+  width: 100%;             /* 铺满全屏宽度 */
+  border-bottom: 1rpx solid #f5f5f5; /* 加一条淡淡的底线，视觉分割更好看 */
+}
+
+.van-search {
+  padding-bottom: 1 !important; /* 抵消一部分默认间距 */
+}
+
+.van-search__content {
+  background-color: #ffffff !important; /* 输入框内部变成纯白 */
+  border-radius: 32rpx !important;      /* 更圆润的圆角 */
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.03); /* 微微的阴影 */
+}
+
+/* ================================= 
+   3. 帖子卡片样式 (保持原样)
+   ================================= */
+.card {
+  position: relative;
+  background: #ffffff;
+  margin: 10rpx;       /* 卡片四周留空 */
+  padding: 32rpx 32rpx 10rpx 32rpx;      /* 卡片内部留空 */
+  border-radius: 20rpx; 
+  box-shadow: 0 8rpx 20rpx rgba(0, 0, 0, 0.03); /* 极淡的阴影 */
+  overflow: hidden; /*防止右上角的标签超出去 */
+}
+
+.top-tag {
+  position: absolute; /* 绝对定位 */
+  top: 0;             /* 贴紧顶部 */
+  right: 0;           /* 贴紧右侧 */
+  background: linear-gradient(135deg, #4F7BFC, #1890ff); /* 漂亮的蓝色渐变 */
+  color: #fff;
+  font-size: 22rpx;
+  padding: 8rpx 24rpx;
+  border-radius: 0 20rpx 0 20rpx; /* 重点：让它的右上角和左下角有圆弧，完美贴合卡片 */
+  font-weight: bold;
+  z-index: 10;
+  box-shadow: -4rpx 4rpx 10rpx rgba(24, 144, 255, 0.2); /* 微微的蓝色投影 */
+}
+
+.user-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20rpx;
+}
+
+.avatar {
+  width: 77rpx;
+  height: 77rpx;
+  border-radius: 50%;
+  background-color: #eee;
+  margin-right: 24rpx;
+  border: 2rpx solid #f0f0f0; 
+}
+
+.user-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.nickname {
+  font-size: 30rpx;
+  font-weight: 600; 
+  color: #2c3e50;
+  margin-bottom: 6rpx;
+}
+
+.time {
+  font-size: 22rpx;
+  color: #95a5a6; 
+}
+
+/* 正文内容 */
+.content {
+  font-size: 30rpx;
+  color: #333;
+  line-height: 1.7; /* 黄金行高 */
+  margin-bottom: 24rpx;
+  text-align: justify; 
+}
+
+.image-grid {
+  display: flex;
+  flex-wrap: wrap; /* 允许换行 */
+  margin-bottom: 20rpx;
+  margin-top: 10rpx;
+}
+
+.post-img {
+  width: 32%;        /* 一行三张 */
+  height: 200rpx;    /* 固定高度 */
+  margin-right: 2%; 
+  border-radius: 8rpx;
+  background-color: #f0f0f0;
+}
+
+/* 每行第3张图不需要右边距 */
+.post-img:nth-child(3n) {
+  margin-right: 0;
+}
+
+/* 单张大图特殊样式 */
+.single-img {
+  width: 32%;       
+  height: 220rpx;   
+  border-radius: 8rpx;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between; /* 左右两端对齐 */
+  align-items: center;
+  margin-top: 24rpx;
+  border-top: 1rpx solid #f9f9f9;
+  padding-top: 8rpx;
+}
+
+.tag-box {
+  font-size: 24rpx;
+  padding: 6rpx 16rpx;
+  border-radius: 8rpx;
+  font-weight: 500;
+  letter-spacing: 1rpx;
+}
+
+.action-box {
+  display: flex; 
+}
+
+.action-btn {
+  display: flex;
+  align-items: center;
+  margin-left: 30rpx;
+  color: #666;
+  font-size: 24rpx;
+  background: #f7f8fa;
+  padding: 10rpx 24rpx;
+  border-radius: 30rpx;
+}
+
+.iconfont {
+  font-size: 25rpx;
+  margin-right: 8rpx;
+}
+
+.liked {
+  color: #ff4d4f; 
+}
+
+.count {
+  font-size: 25rpx;
+  font-weight: 400;
+  position: relative;
+  top: 0rpx; 
+}
+
+/* 点赞动画 */
+@keyframes scale-up {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.3); }
+  100% { transform: scale(1); }
+}
+
+/* ================================= 
+   6. 悬浮球系统 (关键修改部分)
+   ================================= */
+
+/* 悬浮覆盖层：铺满全屏，但允许点击穿透 */
+.fab-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 999;           /* 保证在最上层 */
+  pointer-events: none;   /* 【重点】允许穿透！手指可以透过它滑动页面 */
+}
+
+/* 悬浮球容器：恢复点击 */
+.fab-container {
+  width: 110rpx;
+  height: 110rpx; 
+  z-index: 1000;
+  overflow: visible;      /* 允许子菜单溢出 */
+  pointer-events: auto;   /* 【重点】恢复按钮自身的可点击性 */
+}
+
+/* 主按钮 */
+.fab-main-btn {
+  width: 110rpx;
+  height: 110rpx;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #07c160, #33d67e); /* 保持你的绿色风格 */
+  box-shadow: 0 8rpx 20rpx rgba(7, 193, 96, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 60rpx;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+}
+
+/* 主按钮激活态（旋转45度） */
+.fab-main-btn.active {
+  transform: rotate(45deg); 
+  background: #f5f5f5; 
+  color: #333;
+}
+
+.main-icon {
+  margin-top: -8rpx; 
+}
+
+/* 子菜单列表 */
+.sub-menu-list {
+  position: absolute;
+  bottom: 130rpx;  /* 在主按钮上方 */
+  left: -80rpx;    /* 稍微居中调整 */
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  pointer-events: none; /* 收起时禁止误触 */
+}
+
+/* 展开状态 */
+.sub-menu-list.open {
+  pointer-events: auto;
+}
+
+/* 单个子按钮 */
+.sub-btn {
+  display: flex;
+  align-items: center;
+  margin-bottom: 30rpx;
+  opacity: 0;
+  transform: translateY(40rpx) scale(0.5);
+  transition: all 0.3s ease;
+}
+
+/* 子按钮图标 */
+.sub-icon {
+  width: 90rpx;
+  height: 90rpx;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 40rpx;
+  box-shadow: 0 6rpx 16rpx rgba(0,0,0,0.2);
+}
+
+/* 子按钮文字 */
+.sub-text {
+  background-color: rgba(0,0,0,0.6);
+  color: white;
+  font-size: 24rpx;
+  padding: 8rpx 16rpx;
+  border-radius: 8rpx;
+  margin-right: 16rpx;
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+/* 动画延迟 */
+.sub-menu-list.open .sub-btn {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+.sub-menu-list.open .sub-text {
+  opacity: 1;
+}
+.sub-menu-list.open .sub-btn:nth-child(1) { transition-delay: 0.05s; }
+.sub-menu-list.open .sub-btn:nth-child(2) { transition-delay: 0.1s; }
+.sub-menu-list.open .sub-btn:nth-child(3) { transition-delay: 0.15s; }

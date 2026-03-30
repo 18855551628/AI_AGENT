@@ -1,0 +1,77 @@
+<view class="page-container">
+  
+  <view class="filter-section">
+    <van-dropdown-menu active-color="#4F7BFC" custom-class="custom-dropdown">
+      <van-dropdown-item value="{{ selectedTerm }}" options="{{ termOptions }}" bind:change="onFilterChange" data-type="term" />
+      <van-dropdown-item value="{{ selectedWeek }}" options="{{ weekOptions }}" bind:change="onFilterChange" data-type="week" />
+      <van-dropdown-item value="{{ selectedDay }}" options="{{ dayOptions }}" bind:change="onFilterChange" data-type="day" />
+      
+      <van-dropdown-item id="sectionDrop" title="{{ sectionTitle }}">
+        <view class="section-panel">
+          <view class="section-subtitle">上午</view>
+          <view class="section-grid">
+            <view class="sec-btn {{ item.selected ? 'active' : '' }}" 
+                  wx:for="{{ sectionList }}" wx:key="id" wx:if="{{ item.id <= 5 }}"
+                  bindtap="toggleSection" data-index="{{ index }}">
+              {{ item.id }}
+            </view>
+          </view>
+
+          <view class="section-subtitle">下午</view>
+          <view class="section-grid">
+            <view class="sec-btn {{ item.selected ? 'active' : '' }}" 
+                  wx:for="{{ sectionList }}" wx:key="id" wx:if="{{ item.id >= 6 && item.id <= 10 }}"
+                  bindtap="toggleSection" data-index="{{ index }}">
+              {{ item.id }}
+            </view>
+          </view>
+
+          <view class="section-subtitle">晚上</view>
+          <view class="section-grid">
+            <view class="sec-btn {{ item.selected ? 'active' : '' }}" 
+                  wx:for="{{ sectionList }}" wx:key="id" wx:if="{{ item.id >= 11 }}"
+                  bindtap="toggleSection" data-index="{{ index }}">
+              {{ item.id }}
+            </view>
+          </view>
+
+          <view class="sec-actions">
+            <van-button plain color="#4F7BFC" size="small" custom-class="action-btn" bind:click="clearSections">清空</van-button>
+            <van-button color="#4F7BFC" size="small" custom-class="action-btn" bind:click="confirmSections">确定</van-button>
+          </view>
+        </view>
+      </van-dropdown-item>
+    </van-dropdown-menu>
+
+    <view class="result-summary" wx:if="{{ !loading }}">
+      <text>共找到空闲教室 <text class="highlight-num">{{ roomList.length }}</text> 个</text>
+    </view>
+  </view>
+
+  <view class="content-area">
+    <van-skeleton title row="10" loading="{{ loading }}">
+      
+      <view class="empty-state" wx:if="{{ roomList.length === 0 && !loading }}">
+        <image class="empty-img" src="/images/empty-relax.png" mode="aspectFit" />
+        <text class="empty-text">{{ selectedTerm ? '该时段没有空闲教室哦，换个时间试试吧~' : '请先在顶部选择学年学期~' }}</text>
+      </view>
+
+      <view class="room-list" wx:if="{{ roomList.length > 0 }}">
+        <block wx:for="{{ roomList }}" wx:key="id">
+          <view class="room-card">
+            <view class="card-left">
+              <view class="room-name">{{ item.name }}</view>
+              <view class="room-building">{{ item.building || '未知教学楼' }}</view>
+            </view>
+            <view class="card-right">
+              <view class="tag tag-purple">{{ item.type }}</view>
+              <view class="tag tag-green">{{ item.seats }}个座位</view>
+            </view>
+          </view>
+        </block>
+      </view>
+
+    </van-skeleton>
+  </view>
+
+</view>

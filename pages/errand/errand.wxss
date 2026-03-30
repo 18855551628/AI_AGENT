@@ -1,0 +1,126 @@
+page {
+  background-color: #F4F6F9;
+}
+
+/* ================= 通用列表容器 ================= */
+.list-container {
+  padding: 30rpx 24rpx; /* 加大整体边距 */
+  padding-bottom: 60rpx;
+}
+
+/* ================= 发单表单区 ================= */
+.form-container {
+  padding: 30rpx 24rpx;
+}
+.form-group {
+  background: #fff;
+  border-radius: 24rpx; /* 圆角改大 */
+  padding: 36rpx 30rpx; /* 加大内部留白 */
+  margin-bottom: 30rpx; /* 加大模块间距 */
+  box-shadow: 0 4rpx 20rpx rgba(0,0,0,0.02);
+}
+.group-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 30rpx;
+}
+.radio-item {
+  margin-right: 20rpx; /* 增加单选框之间的间距 */
+}
+.custom-field-group {
+  padding: 16rpx 0; 
+}
+.submit-btn-wrap {
+  margin-top: 60rpx;
+  padding: 0 20rpx;
+}
+
+/* ================= 跑腿卡片设计 ================= */
+.task-card {
+  background: #fff;
+  border-radius: 28rpx; /* 更柔和的圆角 */
+  padding: 36rpx; /* 增加卡片内边距，告别拥挤 */
+  margin-bottom: 30rpx; /* 卡片之间的间距加大 */
+  box-shadow: 0 6rpx 24rpx rgba(0,0,0,0.04);
+}
+
+/* 卡片头部 */
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24rpx;
+}
+.title-left {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+}
+.status-text {
+  font-size: 26rpx;
+  font-weight: bold;
+}
+.reward-text {
+  color: #FF5722;
+  font-size: 40rpx; /* 赏金放大，更吸引人 */
+  font-weight: bold;
+}
+.rmb {
+  font-size: 24rpx;
+  margin-right: 4rpx;
+}
+
+/* 卡片内容 */
+.desc-text {
+  font-size: 30rpx;
+  color: #333;
+  font-weight: 500;
+  margin-bottom: 24rpx;
+  line-height: 1.6; /* 增加行高，阅读更舒适 */
+}
+.route-box {
+  background: #F8F9FA;
+  padding: 24rpx; /* 增加地址框内边距 */
+  border-radius: 16rpx;
+  display: flex;
+  flex-direction: column;
+  gap: 20rpx; /* 取件和送件之间的间距加大 */
+}
+.route-item {
+  display: flex;
+  align-items: flex-start; /* 顶部对齐防长地址换行不好看 */
+}
+.dot {
+  width: 14rpx;
+  height: 14rpx;
+  border-radius: 50%;
+  margin-right: 16rpx;
+  margin-top: 12rpx; /* 微调圆点位置与文字对齐 */
+  flex-shrink: 0;
+}
+.dot-green { background: #00C853; }
+.dot-orange { background: #FF9100; }
+.route-text {
+  font-size: 28rpx;
+  color: #555;
+  line-height: 1.4;
+}
+
+/* 卡片底部 */
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 30rpx;
+  padding-top: 24rpx;
+  border-top: 2rpx dashed #f0f0f0; /* 虚线更柔和 */
+}
+.time-text {
+  font-size: 24rpx;
+  color: #aaa;
+}
+.action-btns {
+  display: flex;
+  align-items: center;
+}

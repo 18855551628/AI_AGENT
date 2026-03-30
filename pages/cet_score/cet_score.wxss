@@ -1,0 +1,107 @@
+page {
+  background-color: #f7f8fa;
+}
+
+.page-container {
+  padding-bottom: 60rpx;
+}
+
+.header {
+  padding: 40rpx 32rpx 20rpx;
+}
+
+.title {
+  font-size: 40rpx;
+  font-weight: 500;
+  color: #333;
+  display: block;
+}
+
+.subtitle {
+  font-size: 26rpx;
+  color: #999;
+  margin-top: 10rpx;
+  display: block;
+}
+
+/* 覆盖 Vant cell-group 的默认外边距，使其更紧凑 */
+.van-cell-group__title {
+  padding: 30rpx 32rpx 16rpx !important;
+  font-size: 26rpx !important;
+  color: #666 !important;
+}
+
+.button-wrap {
+  margin: 60rpx 32rpx;
+}
+
+/* 弹窗结果区样式 */
+.result-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.result-label {
+  font-size: 28rpx;
+  color: #666;
+}
+
+.result-value {
+  font-size: 110rpx;
+  font-weight: bold;
+  margin: 20rpx 0;
+}
+
+.is-pass {
+  color: #07c160; /* 微信标准绿 */
+}
+
+.is-fail {
+  color: #ee0a24; /* Vant 标准红 */
+}
+
+.result-desc {
+  font-size: 28rpx;
+  color: #333;
+}
+
+/* 在原有 cet_score.wxss 的最下方追加以下代码即可 */
+
+.tips-box {
+  margin: 0 32rpx 40rpx;
+  padding: 24rpx;
+  background-color: #f0f2f5;
+  border-radius: 12rpx;
+}
+
+.tips-title {
+  font-size: 24rpx;
+  font-weight: bold;
+  color: #666;
+  margin-bottom: 12rpx;
+}
+
+.tips-text {
+  font-size: 22rpx;
+  color: #888;
+  line-height: 1.6;
+  text-align: justify;
+  margin-bottom: 8rpx;
+}
+
+.tips-text:last-child {
+  margin-bottom: 0;
+}
+
+
+
+.tab-content {
+  padding-top: 20rpx; /* 给 Tab 下方的卡片留出呼吸空间 */
+}
+
+.van-tabs__scroll {
+  background-color: transparent !important;
+}

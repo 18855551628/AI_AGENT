@@ -1,0 +1,47 @@
+<view class="map-container">
+  <map 
+    id="myMap"
+    class="campus-map"
+    longitude="{{longitude}}" 
+    latitude="{{latitude}}" 
+    scale="17" 
+    markers="{{markers}}"
+    polyline="{{polyline}}" 
+    show-location="true"
+    bindmarkertap="onMarkerTap"
+    bindcallouttap="onMarkerTap"
+  >
+  </map>
+
+  <view class="detail-card" wx:if="{{selectedMarker}}">
+    <view class="card-left">
+      <view class="card-name">{{selectedMarker.callout.content}}</view>
+      <view class="card-desc">{{selectedMarker.desc || '校园地标'}}</view>
+    </view>
+    <view class="nav-btn" bindtap="startNavigation">
+      <van-icon name="points" size="20px" color="#fff" />
+      <text>开始导航</text>
+    </view>
+    <view class="close-icon" bindtap="closeDetail">×</view>
+  </view>
+
+  <view class="location-list-box" wx:if="{{!selectedMarker}}">
+    <view class="list-header">
+      <text class="title">校园地点 ({{markers.length}})</text>
+    </view>
+    <scroll-view scroll-y="true" class="list-scroll">
+      <block wx:for="{{markers}}" wx:key="id">
+        <view class="location-item" bindtap="onListTap" data-id="{{item.id}}">
+          <view class="item-left">
+            <view class="item-name">{{item.callout.content}}</view>
+            <view class="item-desc">{{item.desc || '校园地标'}}</view>
+          </view>
+          <view class="item-right">
+            <van-icon name="location-o" size="20px" color="#999" />
+            <text class="go-text">查看位置</text>
+          </view>
+        </view>
+      </block>
+    </scroll-view>
+  </view>
+</view>

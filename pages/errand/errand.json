@@ -1,0 +1,17 @@
+{
+  "navigationBarTitleText": "跑腿代办",
+  "navigationBarBackgroundColor": "#4F7BFC",
+  "navigationBarTextStyle": "white",
+  "backgroundColor": "#F4F6F9",
+  "usingComponents": {
+    "van-tab": "@vant/weapp/tab/index",
+    "van-tabs": "@vant/weapp/tabs/index",
+    "van-field": "@vant/weapp/field/index",
+    "van-button": "@vant/weapp/button/index",
+    "van-radio": "@vant/weapp/radio/index",
+    "van-radio-group": "@vant/weapp/radio-group/index",
+    "van-tag": "@vant/weapp/tag/index",
+    "van-empty": "@vant/weapp/empty/index",
+    "van-toast": "@vant/weapp/toast/index"
+  }
+}

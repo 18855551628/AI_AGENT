@@ -1,0 +1,54 @@
+<view class="container" wx:if="{{goods}}">
+  
+  <swiper class="gallery" indicator-dots="{{goods.imgs.length > 1}}" indicator-active-color="#ffd000" autoplay circular>
+    <block wx:for="{{goods.imgs}}" wx:key="*this">
+      <swiper-item>
+        <image src="{{item}}" mode="aspectFill" class="slide-image" bindtap="onPreviewImage" data-url="{{item}}"></image>
+      </swiper-item>
+    </block>
+  </swiper>
+
+  <view class="info-card main-info">
+    <view class="price-row">
+      <view class="price">
+        <text class="symbol">¥</text>{{goods.price}}
+      </view>
+      <view class="original-price" wx:if="{{goods.original_price}}">原价 ¥{{goods.original_price}}</view>
+      <view class="view-count"> {{goods.view_count || 1}}人看过</view>
+    </view>
+    
+    <view class="title">{{goods.title}}</view>
+
+    <view class="tags-row" wx:if="{{goods.tags && goods.tags.length > 0}}">
+      <block wx:for="{{goods.tags}}" wx:key="*this">
+        <view class="tag-item">{{item}}</view>
+      </block>
+    </view>
+  </view>
+
+  <view class="info-card desc-box">
+    <view class="section-title">宝贝详情</view>
+    <text class="desc-text" user-select="true">{{goods.desc}}</text>
+  </view>
+
+  <view class="info-card seller-box">
+    <image class="avatar" src="{{goods.seller_info.avatarUrl || '/images/default-avatar.png'}}"></image>
+    <view class="seller-mid">
+      <view class="name">{{goods.seller_info.nickName}}</view>
+      <view class="tips">交易前请确认商品状态，建议当面交易</view>
+    </view>
+  </view>
+
+  <view style="height: 120rpx;"></view>
+
+  <view class="bottom-bar">
+    <view class="action-btn share" bindtap="onShareAppMessage">
+      <text class="icon">🔗</text>
+      <text>分享</text>
+    </view>
+    <view class="contact-btn" bindtap="onContactSeller">
+      <text>我想要 / 获取联系方式</text>
+    </view>
+  </view>
+
+</view>
