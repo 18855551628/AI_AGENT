@@ -1,0 +1,77 @@
+<view class="mine-container">
+  <view class="tab-header">
+    <view class="tab-item {{currentTab === 'published' ? 'active' : ''}}" bindtap="switchTab" data-tab="published">我发布的</view>
+    <view class="tab-item {{currentTab === 'applied' ? 'active' : ''}}" bindtap="switchTab" data-tab="applied">我申请的</view>
+    <view class="tab-item {{currentTab === 'received' ? 'active' : ''}}" bindtap="switchTab" data-tab="received">向我申请的</view>
+  </view>
+
+  <view class="list-container" wx:if="{{currentTab === 'published'}}">
+    <block wx:for="{{publishedList}}" wx:key="_id">
+      <view class="post-card">
+        <view class="post-content">
+          <text class="tag-text" wx:if="{{item.tag}}">#{{item.tag}}#</text>
+          <text class="desc-text">{{item.content}}</text>
+        </view>
+        <view class="post-footer">
+          <text class="time-text">发布于 {{item.time}}</text>
+          <button class="delete-btn" bindtap="handleDelete" data-id="{{item._id}}">删除</button>
+        </view>
+      </view>
+    </block>
+    <view class="empty-tip" wx:if="{{publishedList.length === 0}}">暂无发布的数据</view>
+    <view class="empty-tip" wx:if="{{!pubHasMore && publishedList.length > 0}}">没有更多了</view>
+  </view>
+
+  <view class="list-container" wx:if="{{currentTab === 'applied'}}">
+    <block wx:for="{{appliedList}}" wx:key="_id">
+      <view class="post-card">
+        <view class="post-header">
+          <image class="avatar" src="{{item.partner_info.avatar}}" mode="aspectFill"></image>
+          <view class="name-box">
+            <text class="user-name">{{item.partner_info.nickname}}</text>
+            <text class="status-text" style="{{item.status === 'accepted' ? 'color:#07c160;' : ''}}">{{item.status === 'pending' ? '待对方处理' : '已同意'}}</text>
+          </view>
+        </view>
+        <view class="post-content">
+          <text class="tag-text" wx:if="{{item.partner_info.tag}}">#{{item.partner_info.tag}}#</text>
+          <text class="desc-text">{{item.partner_info.content}}</text>
+        </view>
+        <view class="post-footer">
+          <text class="time-text" wx:if="{{item.status === 'accepted'}}">微信号：{{item.partner_info.wechatId || 'Ta未填写'}}</text>
+          <text class="time-text" wx:else></text>
+          
+          <button class="cancel-btn" bindtap="handleCancelApply" data-id="{{item._id}}">取消申请</button>
+        </view>
+      </view>
+    </block>
+    <view class="empty-tip" wx:if="{{appliedList.length === 0}}">暂无申请的数据</view>
+    <view class="empty-tip" wx:if="{{!appHasMore && appliedList.length > 0}}">没有更多了</view>
+  </view>
+
+  <view class="list-container" wx:if="{{currentTab === 'received'}}">
+    <block wx:for="{{receivedList}}" wx:key="_id">
+      <view class="post-card">
+        <view class="post-header">
+          <image class="avatar" src="{{item.apply_user_info.avatarUrl}}" mode="aspectFill"></image>
+          <view class="name-box">
+            <text class="user-name">{{item.apply_user_info.nickName}}</text>
+            <text class="status-text" style="{{item.status === 'accepted' ? 'color:#07c160;' : ''}}">{{item.status === 'pending' ? '待处理' : '已同意'}}</text>
+          </view>
+        </view>
+        <view class="post-content">
+          <text class="desc-text" style="color:#666; font-size:26rpx; margin-bottom:10rpx; display:block;">TA申请加入你的搭子：</text>
+          <text class="tag-text" wx:if="{{item.partner_info.tag}}">#{{item.partner_info.tag}}#</text>
+          <text class="desc-text">{{item.partner_info.content}}</text>
+        </view>
+        <view class="post-footer">
+          <text class="time-text" wx:if="{{item.status === 'accepted'}}">对方微信：{{item.apply_user_info.wechatId || 'Ta未填写'}}</text>
+          <text class="time-text" wx:else></text>
+          
+          <button wx:if="{{item.status === 'pending'}}" class="accept-btn" bindtap="handleAcceptApply" data-item="{{item}}">同意申请</button>
+        </view>
+      </view>
+    </block>
+    <view class="empty-tip" wx:if="{{receivedList.length === 0}}">暂无向我申请的数据</view>
+    <view class="empty-tip" wx:if="{{!recHasMore && receivedList.length > 0}}">没有更多了</view>
+  </view>
+</view>

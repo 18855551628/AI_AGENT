@@ -1,0 +1,14 @@
+{
+  "navigationBarTitleText": "体测精准计算器",
+  "usingComponents": {
+      "van-icon": "@vant/weapp/icon/index",
+      "van-button": "@vant/weapp/button/index",
+      "van-cell-group": "@vant/weapp/cell-group/index",
+      "van-cell": "@vant/weapp/cell/index",
+      "van-field": "@vant/weapp/field/index",
+      "van-radio": "@vant/weapp/radio/index",
+      "van-radio-group": "@vant/weapp/radio-group/index",
+      "van-popup": "@vant/weapp/popup/index",
+      "van-toast": "@vant/weapp/toast/index"
+  }
+}

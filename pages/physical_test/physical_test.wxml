@@ -1,0 +1,67 @@
+<view class="page-container">
+  <view class="header">
+    <text class="title">大学生体测计算器</text>
+    <text class="subtitle">基于国家学生体质健康标准</text>
+  </view>
+
+  <van-cell-group inset title="基础信息">
+    <van-cell title="性别">
+      <van-radio-group value="{{gender}}" bind:change="onGenderChange" direction="horizontal" slot="right-icon">
+        <van-radio name="m">男生</van-radio>
+        <van-radio name="f">女生</van-radio>
+      </van-radio-group>
+    </van-cell>
+    <van-cell title="年级">
+      <van-radio-group value="{{grade}}" bind:change="onGradeChange" direction="horizontal" slot="right-icon">
+        <van-radio name="12">大一/大二</van-radio>
+        <van-radio name="34">大三/大四</van-radio>
+      </van-radio-group>
+    </van-cell>
+  </van-cell-group>
+
+  <van-cell-group inset title="身体形态 (占比 15%)">
+    <van-field label="身高 (cm)" type="digit" placeholder="例: 175" value="{{height}}" bind:change="onInput" data-key="height" input-align="right" />
+    <van-field label="体重 (kg)" type="digit" placeholder="例: 65" value="{{weight}}" bind:change="onInput" data-key="weight" input-align="right" />
+  </van-cell-group>
+
+  <van-cell-group inset title="各项体测成绩">
+    <van-field label="肺活量 (ml)" type="digit" placeholder="例: 3500" value="{{lung}}" bind:change="onInput" data-key="lung" input-align="right" />
+    <van-field label="50米跑 (秒)" type="digit" placeholder="例: 7.2" value="{{run50}}" bind:change="onInput" data-key="run50" input-align="right" />
+    <van-field label="坐位体前屈(cm)" type="digit" placeholder="例: 15.5" value="{{reach}}" bind:change="onInput" data-key="reach" input-align="right" />
+    <van-field label="立定跳远 (cm)" type="digit" placeholder="例: 230" value="{{jump}}" bind:change="onInput" data-key="jump" input-align="right" />
+    <van-field label="{{gender === 'm' ? '引体向上 (次)' : '仰卧起坐 (次)'}}" type="digit" placeholder="例: 12" value="{{core}}" bind:change="onInput" data-key="core" input-align="right" />
+    <van-field label="{{gender === 'm' ? '1000米跑' : '800米跑'}}" type="digit" placeholder="例: 3.45 (代表3分45秒)" value="{{runLong}}" bind:change="onInput" data-key="runLong" input-align="right" />
+  </van-cell-group>
+
+  <view class="button-wrap">
+    <van-button type="info" block bind:click="calculateScore">精确生成成绩单</van-button>
+  </view>
+
+  <van-popup show="{{ showResult }}" round closeable position="bottom" custom-style="height: 65%" bind:close="onCloseResult">
+    <view class="result-box">
+      <view class="result-header">
+        <view class="total-score">{{finalTotal}}</view>
+        <view class="score-grade {{finalTotal >= 60 ? 'pass' : 'fail'}}">{{finalGrade}}</view>
+      </view>
+      
+      <view class="breakdown">
+        <view class="breakdown-title">各单项得分明细 (已乘权重并含加分)</view>
+        <view class="breakdown-item"><text>BMI ({{bmiVal}})</text><text class="item-score">{{bmiRes}} 分</text></view>
+        <view class="breakdown-item"><text>肺活量 (15%)</text><text class="item-score">{{lungRes}} 分</text></view>
+        <view class="breakdown-item"><text>50米跑 (20%)</text><text class="item-score">{{run50Res}} 分</text></view>
+        <view class="breakdown-item"><text>坐位体前屈 (10%)</text><text class="item-score">{{reachRes}} 分</text></view>
+        <view class="breakdown-item"><text>立定跳远 (10%)</text><text class="item-score">{{jumpRes}} 分</text></view>
+        <view class="breakdown-item">
+          <text>{{gender === 'm' ? '引体向上' : '仰卧起坐'}} (10%+加分)</text>
+          <text class="item-score">{{coreRes}} 分 <text wx:if="{{coreBonus>0}}" style="color:#ee0a24;font-size:22rpx;">(+{{coreBonus}})</text></text>
+        </view>
+        <view class="breakdown-item">
+          <text>{{gender === 'm' ? '1000米跑' : '800米跑'}} (20%+加分)</text>
+          <text class="item-score">{{runLongRes}} 分 <text wx:if="{{runLongBonus>0}}" style="color:#ee0a24;font-size:22rpx;">(+{{runLongBonus}})</text></text>
+        </view>
+      </view>
+    </view>
+  </van-popup>
+
+  <van-toast id="van-toast" />
+</view>

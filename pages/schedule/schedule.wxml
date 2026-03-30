@@ -1,0 +1,82 @@
+<view class="page-container">
+  
+  <view class="filter-section">
+    <van-dropdown-menu active-color="#4F7BFC" custom-class="custom-dropdown">
+      <van-dropdown-item value="{{ selectedYear }}" options="{{ yearOptions }}" bind:change="onYearChange" />
+      <van-dropdown-item value="{{ selectedTerm }}" options="{{ termOptions }}" bind:change="onTermChange" />
+    </van-dropdown-menu>
+  </view>
+
+  <view class="content-area">
+    <van-skeleton title row="10" loading="{{ loading }}">
+      
+      <van-empty wx:if="{{ scheduleList.length === 0 && !loading }}" description="该学期暂无排课数据" />
+
+      <view class="timetable-container" wx:if="{{ scheduleList.length > 0 }}">
+        
+        <view class="time-header">
+          <view class="header-placeholder">{{ selectedTerm === '3' ? '秋' : '春' }}</view>
+          <view class="header-day" wx:for="{{ ['一','二','三','四','五','六','日'] }}" wx:key="*this">周{{ item }}</view>
+        </view>
+
+        <view class="time-body">
+          <view class="sidebar">
+            <view class="sidebar-item" wx:for="{{ 13 }}" wx:key="*this">{{ index + 1 }}</view>
+          </view>
+
+          <view class="grid-lines">
+            <view class="grid-row" wx:for="{{ 13 }}" wx:key="*this"></view>
+          </view>
+
+          <block wx:for="{{ scheduleList }}" wx:key="index">
+            <view class="course-block" 
+                  style="top: {{ (item.startSection - 1) * 160 }}rpx; left: calc(60rpx + (100% - 60rpx) / 7 * {{ item.day - 1 }}); height: {{ item.sectionCount * 160 - 6 }}rpx; width: calc((100% - 60rpx) / 7 - 6rpx); background-color: {{ item.colorConfig.bg }}; color: {{ item.colorConfig.font }};"
+                  bindtap="showCourseDetail" 
+                  data-course="{{ item }}">
+              <view class="block-name">{{ item.name }}</view>
+              <view class="block-room">{{ item.room }}</view>
+            </view>
+          </block>
+
+        </view>
+      </view>
+
+    </van-skeleton>
+  </view>
+  <van-popup
+    show="{{ isShowDetail }}"
+    round
+    closeable
+    position="bottom"
+    custom-style="height: 50%; padding: 40rpx 30rpx;"
+    bind:close="closeCourseDetail"
+  >
+    <view class="detail-header">
+      <view class="detail-title">{{ currentCourse.name }}</view>
+    </view>
+    
+    <view class="detail-content">
+      <view class="detail-item">
+        <text class="detail-icon">👨‍🏫</text>
+        <text class="detail-label">授课教师：</text>
+        <text class="detail-value">{{ currentCourse.teacher || '未知' }}</text>
+      </view>
+      <view class="detail-item">
+        <text class="detail-icon">📍</text>
+        <text class="detail-label">上课教室：</text>
+        <text class="detail-value">{{ currentCourse.room }}</text>
+      </view>
+      <view class="detail-item">
+        <text class="detail-icon">⏱️</text>
+        <text class="detail-label">上课周次：</text>
+        <text class="detail-value">{{ currentCourse.weeks }}</text>
+      </view>
+      <view class="detail-item">
+        <text class="detail-icon">📅</text>
+        <text class="detail-label">上课时间：</text>
+        <text class="detail-value">星期{{ currentCourse.dayStr }} | 第{{ currentCourse.section }} ({{ currentCourse.timeRange }})</text>
+      </view>
+    </view>
+  </van-popup>
+  <van-toast id="van-toast" />
+</view>

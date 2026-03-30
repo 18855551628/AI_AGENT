@@ -1,0 +1,44 @@
+<view class="container">
+  <view class="section-title">选择话题</view>
+  <view class="category-box">
+    <block wx:for="{{categories}}" wx:key="value">
+      <view 
+        class="chip {{selectedCategory === item.value ? 'active' : ''}}" 
+        bindtap="onSelectCategory" 
+        data-val="{{item.value}}"
+      >
+        {{item.label}}
+      </view>
+    </block>
+  </view>
+
+  <view class="input-card">
+    <van-field
+      value="{{ content }}"
+      type="textarea"
+      placeholder="这一刻，你想说什么..."
+      autosize="{{ { minHeight: 150 } }}"
+      border="{{ false }}"
+      bind:input="onInput"
+      maxlength="500"
+      show-word-limit
+    />
+    
+    <view class="upload-box">
+      <van-uploader 
+        file-list="{{ fileList }}" 
+        bind:after-read="afterRead" 
+        bind:delete="deleteImg"
+        max-count="9"
+        multiple
+      />
+    </view>
+  </view>
+
+  <view class="footer-btn">
+    <van-button round type="primary" block color="#07c160" bind:click="submitPost">
+      立即发布
+    </van-button>
+  </view>
+
+</view>

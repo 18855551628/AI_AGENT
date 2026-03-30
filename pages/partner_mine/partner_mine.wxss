@@ -1,0 +1,167 @@
+page {
+  background: #F8F9FC;
+}
+
+.mine-container {
+  min-height: 100vh;
+}
+
+.tab-header {
+  display: flex;
+  background: #fff;
+  padding: 0 30rpx;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.tab-item {
+  flex: 1;
+  text-align: center;
+  padding: 30rpx 0;
+  font-size: 30rpx;
+  color: #666;
+  position: relative;
+}
+
+.tab-item.active {
+  color: #1A1A1A;
+  font-weight: bold;
+}
+
+.tab-item.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40rpx;
+  height: 6rpx;
+  background: #1A1A1A;
+  border-radius: 6rpx;
+}
+
+.list-container {
+  padding: 30rpx;
+}
+
+.post-card {
+  background: #fff;
+  border-radius: 20rpx;
+  padding: 30rpx;
+  margin-bottom: 30rpx;
+  box-shadow: 0 4rpx 16rpx rgba(0,0,0,0.03);
+}
+
+.post-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20rpx;
+}
+
+.avatar {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 50%;
+  margin-right: 20rpx;
+  background: #eee;
+}
+
+.name-box {
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.user-name {
+  font-size: 28rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+.status-text {
+  font-size: 24rpx;
+  color: #FF9800;
+}
+
+.post-content {
+  margin-bottom: 20rpx;
+}
+
+.tag-text {
+  color: #667EEA;
+  font-weight: bold;
+  font-size: 26rpx;
+  margin-right: 10rpx;
+}
+
+.desc-text {
+  font-size: 28rpx;
+  color: #444;
+  line-height: 1.5;
+}
+
+.post-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1rpx solid #eee;
+  padding-top: 20rpx;
+}
+
+.time-text {
+  font-size: 24rpx;
+  color: #999;
+}
+
+.delete-btn {
+  margin: 0;
+  padding: 0 30rpx;
+  height: 50rpx;
+  line-height: 50rpx;
+  font-size: 24rpx;
+  color: #FF5722;
+  background: #FFF0ED;
+  border-radius: 25rpx;
+}
+
+.delete-btn::after {
+  border: none;
+}
+
+.cancel-btn {
+  margin: 0;
+  padding: 0 30rpx;
+  height: 50rpx;
+  line-height: 50rpx;
+  font-size: 24rpx;
+  color: #999;
+  background: #F0F3F8;
+  border-radius: 25rpx;
+}
+
+.cancel-btn::after {
+  border: none;
+}
+
+.accept-btn {
+  margin: 0;
+  padding: 0 30rpx;
+  height: 50rpx;
+  line-height: 50rpx;
+  font-size: 24rpx;
+  color: #fff;
+  background: #07c160;
+  border-radius: 25rpx;
+}
+.accept-btn::after {
+  border: none;
+}
+
+.empty-tip {
+  text-align: center;
+  padding: 100rpx 0;
+  color: #999;
+  font-size: 28rpx;
+}

@@ -1,0 +1,49 @@
+<view class="market-container">
+  
+  <view class="asset-header">
+    <view class="asset-title">当前可用积分</view>
+    <view class="asset-points">
+      <van-icon name="gold-coin" color="#FFD700" size="32px" class="coin-icon" />
+      <text class="points-num">{{ myPoints }}</text>
+    </view>
+    <view class="wave-bg"></view>
+  </view>
+
+  <view class="goods-section">
+    <view class="section-title">
+      <van-icon name="hot" color="#FF6B6B" size="20px" /> 热门兑换
+    </view>
+
+    <view class="goods-grid">
+      <view class="goods-card" wx:for="{{ productList }}" wx:key="id">
+        <view class="goods-icon-wrap" style="background: {{item.bgColor}}">
+          <image class="goods-img" src="{{item.image}}" mode="aspectFit"></image>
+        </view>
+        
+        <view class="goods-info">
+          <view class="goods-name">{{item.name}}</view>
+          <view class="goods-desc">{{item.desc}}</view>
+          
+          <view class="goods-owned-tag" wx:if="{{item.ownedCount > 0}}">
+            <text class="owned-text">已拥有 × {{item.ownedCount}}</text>
+          </view>
+          <view class="goods-owned-tag empty" wx:else>
+            <text class="owned-text">未拥有</text>
+          </view>
+        </view>
+        
+        <view class="goods-action">
+          <view class="goods-price">
+            <van-icon name="gold-coin-o" size="14px" color="#FFA836" />
+            <text>{{item.price}}</text>
+          </view>
+          <view class="buy-btn {{ myPoints >= item.price ? '' : 'disabled' }}" 
+                bindtap="handleBuy" data-item="{{item}}">
+            兑换
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  
+</view>

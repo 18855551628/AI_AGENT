@@ -1,0 +1,65 @@
+page {
+  background-color: #f7f8fa;
+  padding-bottom: 120rpx; /* 给底部按钮留位置 */
+}
+
+.container {
+  padding: 30rpx;
+}
+
+.section-title {
+  font-size: 28rpx;
+  color: #666;
+  margin-bottom: 20rpx;
+  font-weight: 500;
+  margin-left: 10rpx;
+}
+
+/* --- 分类标签样式 --- */
+.category-box {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 40rpx;
+}
+
+.chip {
+  padding: 12rpx 32rpx;
+  background-color: #ffffff;
+  color: #666;
+  font-size: 26rpx;
+  border-radius: 40rpx; /* 胶囊形状 */
+  margin-right: 20rpx;
+  margin-bottom: 20rpx;
+  border: 1rpx solid #ebedf0;
+  transition: all 0.2s; /* 点击动画 */
+}
+
+/* 选中状态：变绿 */
+.chip.active {
+  background-color: #e8f8f0; /* 极淡的绿色背景 */
+  color: #07c160;            /* 绿色文字 */
+  border-color: #07c160;     /* 绿色边框 */
+  font-weight: bold;
+}
+
+/* --- 输入框卡片 --- */
+.input-card {
+  background-color: white;
+  border-radius: 20rpx;
+  padding: 20rpx;
+  box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.03);
+}
+
+/* --- 底部按钮 --- */
+.footer-btn {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 30rpx 40rpx 50rpx; /* 底部留多点白，适配 iPhone X 横条 */
+  background-color: rgba(255, 255, 255, 0.9); /* 半透明背景 */
+}
+
+.upload-box {
+  padding: 0 30rpx 30rpx; /* 给图片上传区留点边距 */
+}

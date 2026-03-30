@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "积分商城",
+  "navigationBarBackgroundColor": "#FF8E53",
+  "navigationBarTextStyle": "white",
+  "usingComponents": {
+    "van-icon": "@vant/weapp/icon/index"
+  }
+}

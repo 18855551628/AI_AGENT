@@ -1,0 +1,161 @@
+page {
+  background-color: #F7F8FA;
+}
+.market-container {
+  padding-bottom: 40rpx;
+}
+
+/* === 资产大屏 === */
+.asset-header {
+  background: linear-gradient(135deg, #FF8E53 0%, #FF6B6B 100%);
+  padding: 60rpx 40rpx 100rpx;
+  color: white;
+  position: relative;
+  overflow: hidden;
+  border-radius: 0 0 40rpx 40rpx;
+  box-shadow: 0 8rpx 20rpx rgba(255, 107, 107, 0.2);
+}
+.asset-title {
+  font-size: 28rpx;
+  opacity: 0.9;
+  margin-bottom: 12rpx;
+}
+.asset-points {
+  display: flex;
+  align-items: baseline;
+}
+.coin-icon {
+  margin-right: 12rpx;
+  transform: translateY(-6rpx);
+}
+.points-num {
+  font-size: 80rpx;
+  font-weight: 900;
+  letter-spacing: 2rpx;
+}
+.wave-bg {
+  position: absolute;
+  bottom: -40rpx;
+  right: -40rpx;
+  width: 200rpx;
+  height: 200rpx;
+  background: rgba(255,255,255,0.1);
+  border-radius: 50%;
+}
+
+/* === 货架区 === */
+.goods-section {
+  padding: 0 30rpx;
+  margin-top: 10rpx; /* 向上穿透一点，增加层次感 */
+  position: relative;
+  z-index: 2;
+}
+.section-title {
+  display: flex;
+  align-items: center;
+  font-size: 40rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 24rpx;
+  margin-left: 10rpx;
+}
+
+/* 瀑布流/网格布局 */
+.goods-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* 两列排布 */
+  gap: 24rpx;
+}
+.goods-card {
+  background: #fff;
+  border-radius: 24rpx;
+  padding: 24rpx;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 4rpx 16rpx rgba(0,0,0,0.04);
+}
+
+.goods-icon-wrap {
+  width: 100%;
+  height: 160rpx;
+  border-radius: 16rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20rpx;
+}
+
+.goods-img {
+  width: 200rpx;
+  height: 200rpx;
+}
+
+.goods-info {
+  flex: 1;
+}
+.goods-name {
+  font-size: 28rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 8rpx;
+}
+
+.goods-owned-tag {
+  display: inline-flex;
+  align-items: center;
+  background: #FFF4E8; /* 浅橙色背景 */
+  color: #FFA836;      /* 橙色字体，呼应你的主题 */
+  padding: 4rpx 12rpx;
+  border-radius: 8rpx;
+  margin-bottom: 20rpx; /* 顶一下下面的虚线或价格 */
+}
+
+/* 如果未拥有，显示灰色的样式 */
+.goods-owned-tag.empty {
+  background: #F5F6F8;
+  color: #B0B3BA;
+}
+
+.owned-text {
+  font-size: 20rpx;
+  margin-left: 6rpx;
+  font-weight: bold;
+}
+.goods-desc {
+  font-size: 22rpx;
+  color: #999;
+  line-height: 1.4;
+  margin-bottom: 10rpx;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.goods-action {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 2rpx dashed #eee;
+  padding-top: 16rpx;
+}
+.goods-price {
+  font-size: 32rpx;
+  font-weight: 800;
+  color: #FFA836;
+  display: flex;
+  align-items: center;
+  gap: 4rpx;
+}
+.buy-btn {
+  background: #4F7BFC;
+  color: #fff;
+  font-size: 24rpx;
+  padding: 8rpx 24rpx;
+  border-radius: 30rpx;
+  font-weight: bold;
+}
+.buy-btn.disabled {
+  background: #e0e0e0;
+  color: #999;
+}

@@ -1,0 +1,264 @@
+<view class="container" wx:if="{{post}}">
+  <view class="header-row">
+    <image class="avatar" src="{{post.avatarUrl}}" mode="aspectFill"></image>
+    <view class="user-info">
+      <view class="nickname">{{post.nickName}}</view>
+      <view class="meta-info">{{post.timeString}}</view>
+    </view>
+    <view class="more-icon" bindtap="showMenu">
+      <van-icon name="ellipsis" size="20px" color="#999" />
+    </view>
+  </view>
+
+  <view class="content-text">
+    <text user-select>{{post.content}}</text>
+  </view>
+
+  <view class="image-box" wx:if="{{post.images && post.images.length}}">
+    <block wx:for="{{post.images}}" wx:key="*this">
+      <image 
+        src="{{item}}" 
+        mode="{{post.images.length === 1 ? 'widthFix' : 'aspectFill'}}" 
+        class="post-img {{post.images.length === 1 ? 'single' : 'grid'}}"
+        catchtap="previewImage"
+        data-current="{{item}}"
+      ></image>
+    </block>
+  </view>
+
+  <view class="footer-tool-bar">
+    <view class="tag-pill" wx:if="{{post.tagName}}">
+      # {{post.tagName}}
+    </view>
+
+    <view class="action-group">
+      <button class="action-btn share-btn" open-type="share">
+        <van-icon name="share-o" size="20px" color="#666"/>
+        <text>分享</text>
+      </button>
+      
+      <view class="action-btn {{post.isLiked ? 'active' : ''}}" bindtap="onLike">
+        <van-icon name="{{post.isLiked ? 'good-job' : 'good-job-o'}}" size="20px" color="{{post.isLiked ? '#ff4d4f' : '#666'}}" />
+        <text>{{post.like_count || '点赞'}}</text>
+      </view>
+    </view>
+  </view>
+  
+  <view class="divider-gap"></view>
+
+  <view class="comment-section">
+    <view class="comment-header">
+      <view class="section-title">评论 ({{post.comment_count || 0}})</view>
+      
+      <view class="custom-sort-toggle">
+        <view 
+          class="toggle-item {{ commentSort === 'hot' ? 'active' : '' }}" 
+          bindtap="switchCommentSort" 
+          data-type="hot"
+        >热度</view>
+        <view 
+          class="toggle-item {{ commentSort === 'time' ? 'active' : '' }}" 
+          bindtap="switchCommentSort" 
+          data-type="time"
+        >时间</view>
+      </view>
+      
+    </view>
+
+    <view class="comment-list" wx:if="{{comments.length > 0}}">
+      <block wx:for="{{comments}}" wx:key="_id">
+        <view class="comment-item">
+          <image class="c-avatar" src="{{item.avatarUrl || '/images/default-avatar.png'}}" mode="aspectFill"></image>
+          
+          <view class="c-box">
+            <view class="c-top">
+              <view class="c-user-meta">
+                <view style="display: flex; align-items: center;">
+                  <text class="c-nickname">{{item.nickName}}</text>
+                  <text class="author-tag" wx:if="{{item._openid === post._openid}}">作者</text>
+                </view>
+                <text class="c-time">{{item.timeString}}</text>
+              </view>
+              
+              <view class="c-top-right">
+                <view class="c-like-btn" catchtap="onLikeComment" data-parent-idx="{{index}}" data-id="{{item._id}}">
+                  <van-icon name="{{ item.isLiked ? 'good-job' : 'good-job-o' }}" size="16px" color="{{ item.isLiked ? '#ff4d4f' : '#999' }}" />
+                  <text class="c-like-num" style="{{ item.isLiked ? 'color:#ff4d4f' : '' }}">{{item.like_count || 0}}</text>
+                </view>
+                <view class="c-more-btn" catchtap="showCommentMenu" data-item="{{item}}">
+                  <van-icon name="ellipsis" size="18px" color="#999" />
+                </view>
+              </view>
+            </view>
+            
+            <view class="c-content">
+              <text user-select>{{item.content}}</text>
+            </view>
+
+            <view class="c-imgs" wx:if="{{item.images && item.images.length}}">
+              <block wx:for="{{item.images}}" wx:for-item="img" wx:key="*this">
+                <image src="{{img}}" mode="aspectFill" class="c-img-item" catchtap="previewCommentImage" data-urls="{{item.images}}" data-current="{{img}}"></image>
+              </block>
+            </view>
+
+            <view class="replies-box" wx:if="{{item.replies && item.replies.length > 0}}">
+              <block wx:for="{{item.replies}}" wx:for-item="reply" wx:for-index="replyIdx" wx:key="_id">
+                <view class="reply-item">
+                  
+                  <view class="reply-top">
+                    <view class="reply-user-meta">
+                      <image class="reply-avatar" src="{{reply.avatarUrl || '/images/default-avatar.png'}}" mode="aspectFill"></image>
+                      <text class="reply-nickname">{{reply.nickName}}</text>
+                      <text class="author-tag" wx:if="{{reply._openid === post._openid}}">作者</text>
+                    </view>
+
+                    <view class="reply-like-btn" catchtap="onLikeComment" data-parent-idx="{{index}}" data-reply-idx="{{replyIdx}}" data-id="{{reply._id}}">
+                      <van-icon name="{{ reply.isLiked ? 'good-job' : 'good-job-o' }}" size="14px" color="{{ reply.isLiked ? '#ff4d4f' : '#999' }}" />
+                      <text class="c-like-num" style="{{ reply.isLiked ? 'color:#ff4d4f' : '' }}">{{reply.like_count || 0}}</text>
+                    </view>
+                  </view>
+
+                  <view class="reply-content">
+                    <text wx:if="{{reply.replyToName}}" class="reply-to">回复 @{{reply.replyToName}}：</text>
+                    <text user-select>{{reply.content}}</text>
+                  </view>
+
+                  <view class="reply-bottom">
+                    <text class="c-time">{{reply.timeString}}</text>
+                    <view class="c-more-btn" catchtap="showCommentMenu" data-item="{{reply}}">
+                      <van-icon name="ellipsis" size="16px" color="#999" />
+                    </view>
+                  </view>
+
+                </view>
+              </block>
+            </view>
+
+          </view>
+        </view>
+      </block>
+      <view class="no-more">- 到底啦 -</view>
+    </view>
+
+    <view class="empty-comment" wx:else>
+      <image src="https://img.yzcdn.cn/vant/custom-empty-image.png" mode="aspectFit" style="width: 200rpx; height: 200rpx; opacity: 0.5;"></image>
+      <view class="empty-text">快来抢沙发吧~</view>
+    </view>
+
+    <van-popup
+      show="{{ showCommentMenuPopup }}"
+      position="bottom"
+      round
+      bind:close="onCloseCommentMenu"
+      safe-area-inset-bottom
+      z-index="1000"
+    >
+      <view class="menu-container">
+        <view class="menu-header">更多操作</view>
+        
+        <view class="menu-grid">
+          <view class="menu-item" bindtap="onMenuReply">
+            <view class="menu-icon-box">
+              <van-icon name="chat-o" size="24px" color="#333"/>
+            </view>
+            <text class="menu-text">回复</text>
+          </view>
+
+          <view class="menu-item" bindtap="onMenuCopy">
+            <view class="menu-icon-box">
+              <van-icon name="description" size="24px" color="#333"/>
+            </view>
+            <text class="menu-text">复制</text>
+          </view>
+
+          <view class="menu-item" bindtap="onMenuReport">
+            <view class="menu-icon-box">
+              <van-icon name="warning-o" size="24px" color="#333"/>
+            </view>
+            <text class="menu-text">举报</text>
+          </view>
+
+          <view class="menu-item" wx:if="{{canDelete}}" bindtap="onMenuDelete">
+            <view class="menu-icon-box">
+              <van-icon name="delete-o" size="24px" color="#ff4d4f"/>
+            </view>
+            <text class="menu-text" style="color: #ff4d4f;">删除</text>
+          </view>
+        </view>
+
+        <view class="menu-cancel" bindtap="onCloseCommentMenu">取消</view>
+      </view>
+    </van-popup>
+
+  </view>
+
+  <view style="height: 120rpx;"></view>
+</view>
+
+<view wx:else class="loading-center">
+  <van-loading type="spinner" color="#07c160" />
+</view>
+
+<view class="bottom-bar">
+  <image class="my-avatar" src="{{userInfo.avatarUrl || '/images/default-avatar.png'}}"></image>
+  <view class="input-fake-box" bindtap="onFocusInput">
+    <text>说点什么吧...</text>
+  </view>
+</view>
+
+<van-action-sheet
+  show="{{ showMenu }}"
+  actions="{{ menuActions }}"
+  cancel-text="取消"
+  bind:close="onCloseMenu"
+  bind:cancel="onCloseMenu"
+  bind:select="onSelectMenu"
+/>
+
+<van-popup
+  show="{{ showCommentPopup }}"
+  round
+  position="bottom" 
+  custom-style="height: auto; padding: 40rpx; padding-bottom: 60rpx;"
+  bind:close="onCloseComment"
+  z-index="2000"
+>
+  <view class="popup-content">
+    <view class="popup-title">发表评论</view>
+
+    <view class="input-area">
+      <textarea 
+        class="comment-textarea" 
+        placeholder="{{ placeholder }}" 
+        placeholder-style="color: #ccc;"
+        bindinput="onInputComment"
+        value="{{ commentContent }}"
+        maxlength="200"
+        cursor-spacing="100"
+      ></textarea>
+    </view>
+
+    <view class="upload-area">
+      <van-uploader 
+        file-list="{{ fileList }}" 
+        max-count="3" 
+        bind:after-read="afterRead" 
+        bind:delete="deleteImg"
+        preview-size="80px"
+      />
+    </view>
+
+    <van-button 
+      type="info" 
+      block 
+      round 
+      color="linear-gradient(to right, #4facfe, #00f2fe)"
+      bind:click="submitComment"
+      loading="{{ isSubmitting }}"
+      loading-text="发布中..."
+    >
+      提交评论
+    </van-button>
+
+  </view>
+</van-popup>

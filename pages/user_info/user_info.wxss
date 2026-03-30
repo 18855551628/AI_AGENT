@@ -1,0 +1,58 @@
+/* pages/profile-edit/index.wxss */
+page {
+  background: #f7f8fa;
+}
+
+.avatar-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 60rpx 0;
+  background: #fff;
+  margin-bottom: 20rpx;
+}
+
+/* 头像按钮去样式黑魔法 */
+.avatar-wrapper {
+  padding: 0;
+  width: 160rpx !important;
+  height: 160rpx !important;
+  background: transparent;
+  border-radius: 50%;
+  position: relative;
+}
+
+.avatar-wrapper::after { border: none; }
+
+.camera-icon {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background: rgba(0,0,0,0.6);
+  width: 50rpx;
+  height: 50rpx;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.tip-text {
+  font-size: 24rpx;
+  color: #999;
+  margin-top: 20rpx;
+}
+
+.form-group {
+  margin-top: 20rpx;
+}
+
+.wechat-input {
+  text-align: right;
+  height: 100%;
+  width: 100%;
+}
+
+.btn-area {
+  padding: 60rpx 40rpx;
+}

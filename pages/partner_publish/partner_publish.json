@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "发布搭子需求",
+  "navigationBarBackgroundColor": "#ffffff",
+  "backgroundColor": "#F8F9FC",
+  "usingComponents": {
+    "van-icon": "@vant/weapp/icon/index",
+    "van-toast": "@vant/weapp/toast/index"
+  }
+}

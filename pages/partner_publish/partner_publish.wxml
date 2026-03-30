@@ -1,0 +1,41 @@
+<view class="publish-container">
+  
+  <view class="form-card">
+    
+    <view class="form-group">
+      <view class="form-title">
+        <text class="required">*</text>你想找什么搭子？
+      </view>
+      <view class="tag-list">
+        <block wx:for="{{tags}}" wx:key="*this">
+          <view class="tag-item {{selectedTag === item ? 'active' : ''}}" 
+                bindtap="chooseTag" data-tag="{{item}}">
+            {{item}}
+          </view>
+        </block>
+      </view>
+    </view>
+
+    <view class="form-group">
+      <view class="form-title">
+        <text class="required">*</text>具体需求
+      </view>
+      <view class="textarea-box">
+        <textarea class="content-input" 
+                  placeholder="说点什么吧" 
+                  maxlength="150" 
+                  bindinput="onContentInput" 
+                  value="{{content}}">
+        </textarea>
+        <view class="word-count">{{content.length}}/150</view>
+      </view>
+    </view>
+
+  </view>
+
+  <view class="bottom-action">
+    <button class="submit-btn" bindtap="submitPost">立即发布</button>
+  </view>
+
+  <van-toast id="van-toast" />
+</view>

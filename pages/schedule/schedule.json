@@ -1,0 +1,15 @@
+{
+  "navigationBarTitleText": "我的课表",
+  "navigationBarBackgroundColor": "#4F7BFC",
+  "navigationBarTextStyle": "white",
+  "enablePullDownRefresh": true,
+  "backgroundTextStyle": "dark",
+  "usingComponents": {
+    "van-skeleton": "@vant/weapp/skeleton/index",
+    "van-empty": "@vant/weapp/empty/index",
+    "van-dropdown-menu": "@vant/weapp/dropdown-menu/index",
+    "van-dropdown-item": "@vant/weapp/dropdown-item/index",
+    "van-toast": "@vant/weapp/toast/index",
+    "van-popup": "@vant/weapp/popup/index"
+  }
+}
